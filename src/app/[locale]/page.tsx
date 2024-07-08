@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes";
 
 export default function Page() {
+
   const { theme, setTheme } = useTheme();
 
   return (
@@ -18,3 +19,5 @@ export default function Page() {
     </main>
   );
 }
+
+
