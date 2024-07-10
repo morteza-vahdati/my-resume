@@ -1,22 +1,19 @@
-"use client"
+import { Locale } from "@/i18config";
+import { getDictionary } from "@/lib/dictionary";
 
-import { useTheme } from "next-themes";
 
-export default function Page() {
+export default async function Page({ params: { locale } }: { params: { locale: Locale } }) {
 
-  const { theme, setTheme } = useTheme();
+  const t = await getDictionary(locale, "home")
 
   return (
-    <main className="bg-white dark:bg-black h-screen">
-      <div className={`text-4xl sm:text-6xl md:text-9xl text-center text-primary`}>MODE</div>
-      <div>
-        <select value={theme} onChange={e => setTheme(e.target.value)}>
-          <option value="system">System</option>
-          <option value="dark">Dark</option>
-          <option value="light">Light</option>
-        </select>
+    <>
+      <div className={`text-4xl sm:text-6xl md:text-8xl text-center text-primary`}>{t.header} MODE</div>
+      <div className={`text-4xl text-center text-secondary`}>MODE</div>
+      <div className={`text-center`}>MODE</div>
+      <div className="bg-card-foreground size-10">
       </div>
-    </main>
+    </>
   );
 }
 
