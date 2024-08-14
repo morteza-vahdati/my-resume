@@ -1,4 +1,4 @@
-import Language from "@/components/language";
+import Language from "@/components/Language/language";
 import Theme from "@/components/theme";
 import { Locale } from "@/i18config";
 import { getDictionary } from "@/lib/dictionary";

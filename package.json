@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.4.0",
     "i18next": "^23.11.5",
     "i18next-resources-to-backend": "^1.2.1",
     "negotiator": "^0.6.3",
@@ -18,7 +19,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^14.1.2",
-    "@formatjs/intl-localematcher": "^0.4.0"
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@types/negotiator": "^0.6.1",
@@ -28,8 +29,8 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "postcss": "^8",
+    "server-only": "^0.0.1",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5",
-    "server-only": "^0.0.1"
+    "typescript": "^5"
   }
 }
