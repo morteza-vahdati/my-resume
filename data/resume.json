@@ -1,0 +1,399 @@
+{
+  "personal": {
+    "name": {
+      "en": "Morteza Vahdati",
+      "fa": "مرتضی وحدتی"
+    },
+    "role": {
+      "en": "Frontend Developer",
+      "fa": "برنامه‌نویس فرانت‌اند"
+    },
+    "email": "mvahdati1382@gmail.com",
+    "phone": "09367635074",
+    "location": {
+      "en": "Iran, Tehran",
+      "fa": "ایران، تهران"
+    },
+    "address": {
+      "en": "Shahrak-e-Valiasr, Tehran",
+      "fa": "شهرک ولیعصر، تهران"
+    },
+    "age": 23,
+    "gender": {
+      "en": "Male",
+      "fa": "مرد"
+    },
+    "maritalStatus": {
+      "en": "Single",
+      "fa": "مجرد"
+    },
+    "militaryService": {
+      "en": "Educational exemption",
+      "fa": "معافیت تحصیلی"
+    },
+    "available": true,
+    "languages": [
+      {
+        "name": { "en": "Persian", "fa": "فارسی" },
+        "level": { "en": "Native", "fa": "زبان مادری" }
+      },
+      {
+        "name": { "en": "English", "fa": "انگلیسی" },
+        "level": { "en": "Intermediate", "fa": "متوسط" }
+      }
+    ],
+    "stats": {
+      "years": { "number": "3+", "label": { "en": "Years", "fa": "سال" } },
+      "projects": {
+        "number": "10+",
+        "label": { "en": "Projects", "fa": "پروژه" }
+      },
+      "clients": {
+        "number": "5+",
+        "label": { "en": "Clients", "fa": "کارفرما" }
+      }
+    },
+    "typewriter": {
+      "en": [
+        "modern web apps",
+        "responsive UIs",
+        "performant dashboards",
+        "clean code",
+        "interactive experiences",
+        "scalable solutions",
+        "beautiful interfaces"
+      ],
+      "fa": [
+        "برنامه‌های وب مدرن",
+        "رابط‌های کاربری ریسپانسیو",
+        "داشبوردهای بهینه",
+        "کد تمیز",
+        "تجربه‌های تعاملی",
+        "راهکارهای مقیاس‌پذیر",
+        "رابط‌های کاربری زیبا"
+      ]
+    },
+    "about": {
+      "en": "Frontend developer with experience in designing and implementing modern and responsive user interfaces. Experienced in team projects with a focus on improving user experience and code quality. Passionate about continuous learning and upgrading technical skills. Currently seeking a new job opportunity for professional growth and effective collaboration in software development teams.",
+      "fa": "توسعه‌دهنده فرانت‌اند با تجربه در طراحی و پیاده‌سازی رابط‌های کاربری مدرن و ریسپانسیو. سابقه همکاری در پروژه‌های تیمی و تمرکز بر بهبود تجربه کاربری و کیفیت کد. به یادگیری مستمر و ارتقای مهارت‌های فنی علاقه‌مند هستم. در حال حاضر به دنبال فرصت شغلی جدید برای رشد حرفه‌ای و مشارکت مؤثر در تیم‌های توسعه نرم‌افزار می‌باشم."
+    },
+    "photo": "/images/avatar.jpg",
+    "resumePdf": {
+      "en": "/pdf/morteza-vahdati-en.pdf",
+      "fa": "/pdf/morteza-vahdati-fa.pdf"
+    }
+  },
+
+  "social": {
+    "github": "https://github.com/mvahdati",
+    "linkedin": "https://linkedin.com/in/mvahdati",
+    "email": "mvahdati1382@gmail.com",
+    "phone": "09367635074"
+  },
+
+  "experience": [
+    {
+      "id": 1,
+      "title": {
+        "en": "Frontend Developer",
+        "fa": "برنامه‌نویس فرانت‌اند"
+      },
+      "company": {
+        "en": "Dade Pardazan Bonyan Ava",
+        "fa": "داده پردازان بنیان آوا"
+      },
+      "location": {
+        "en": "Tehran, Iran",
+        "fa": "تهران، ایران"
+      },
+      "type": {
+        "en": "Full-time",
+        "fa": "تمام وقت"
+      },
+      "period": {
+        "en": "Aug 2023 – Present",
+        "fa": "مرداد ۱۴۰۲ – اکنون"
+      },
+      "duration": {
+        "en": "2 yrs 11 mos",
+        "fa": "۲ سال و ۱۱ ماه"
+      },
+      "descriptions": {
+        "en": [
+          "Designed and developed web-based dashboard UIs using React and Next.js",
+          "Built responsive and interactive user interfaces",
+          "Performance optimization and code debugging",
+          "Collaborated with development and analysis teams"
+        ],
+        "fa": [
+          "طراحی و پیاده‌سازی رابط کاربری داشبوردهای تحت وب با React و Next.js",
+          "طراحی و پیاده‌سازی رابط کاربری Responsive",
+          "بهینه‌سازی عملکرد و رفع اشکال کد",
+          "همکاری با تیم‌های توسعه و تحلیل برای تحلیل، توسعه و استقرار"
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": {
+        "en": "Frontend Developer",
+        "fa": "برنامه‌نویس فرانت‌اند"
+      },
+      "company": {
+        "en": "Dade Varzan Novin Shayan",
+        "fa": "داده ورزان نوین شایان"
+      },
+      "location": {
+        "en": "Tehran, Iran",
+        "fa": "تهران، ایران"
+      },
+      "type": {
+        "en": "Hourly / Part-time",
+        "fa": "نیروی ساعتی"
+      },
+      "period": {
+        "en": "Apr 2023 – Jul 2023",
+        "fa": "فروردین ۱۴۰۲ – تیر ۱۴۰۲"
+      },
+      "duration": {
+        "en": "3 mos",
+        "fa": "۳ ماه"
+      },
+      "descriptions": {
+        "en": [
+          "Developed and designed responsive web UIs",
+          "Participated in team projects",
+          "Analyzed and resolved technical issues"
+        ],
+        "fa": [
+          "توسعه و طراحی رابط کاربری برای وب‌سایت‌های ریسپانسیو",
+          "مشارکت در پروژه‌های تیمی",
+          "تحلیل و رفع اشکالات فنی"
+        ]
+      }
+    }
+  ],
+
+  "education": [
+    {
+      "id": 1,
+      "degree": {
+        "en": "B.Sc. Computer Engineering - Software",
+        "fa": "کارشناسی مهندسی کامپیوتر - نرم‌افزار"
+      },
+      "school": {
+        "en": "Islamic Azad University",
+        "fa": "دانشگاه آزاد اسلامی"
+      },
+      "period": {
+        "en": "2023 – Present",
+        "fa": "۱۴۰۲ – اکنون"
+      },
+      "status": {
+        "en": "Studying",
+        "fa": "در حال تحصیل"
+      }
+    },
+    {
+      "id": 2,
+      "degree": {
+        "en": "A.Sc. Computer Engineering - Software",
+        "fa": "کاردانی مهندسی کامپیوتر - نرم‌افزار"
+      },
+      "school": {
+        "en": "Islamic Azad University",
+        "fa": "دانشگاه آزاد اسلامی"
+      },
+      "period": {
+        "en": "2021 – 2023",
+        "fa": "۱۴۰۰ – ۱۴۰۲"
+      },
+      "status": {
+        "en": "Completed",
+        "fa": "فارغ‌التحصیل"
+      }
+    }
+  ],
+
+  "courses": [
+    {
+      "id": 1,
+      "title": {
+        "en": "Bachelor's Internship",
+        "fa": "کارآموزی کارشناسی"
+      },
+      "institution": {
+        "en": "Islamic Azad University",
+        "fa": "دانشگاه آزاد اسلامی"
+      },
+      "duration": {
+        "en": "3 months",
+        "fa": "۳ ماه"
+      },
+      "year": "2025"
+    },
+    {
+      "id": 2,
+      "title": {
+        "en": "Associate's Internship",
+        "fa": "کارآموزی کاردانی"
+      },
+      "institution": {
+        "en": "Islamic Azad University",
+        "fa": "دانشگاه آزاد اسلامی"
+      },
+      "duration": {
+        "en": "3 months",
+        "fa": "۳ ماه"
+      },
+      "year": "2022"
+    }
+  ],
+
+  "skills": {
+    "categories": [
+      {
+        "name": { "en": "Frontend", "fa": "فرانت‌اند" },
+        "items": [
+          {
+            "name": "React",
+            "level": { "en": "Advanced", "fa": "پیشرفته" },
+            "percentage": 90
+          },
+          {
+            "name": "Next.js",
+            "level": { "en": "Advanced", "fa": "پیشرفته" },
+            "percentage": 85
+          },
+          {
+            "name": "TypeScript",
+            "level": { "en": "Advanced", "fa": "پیشرفته" },
+            "percentage": 85
+          },
+          {
+            "name": "JavaScript",
+            "level": { "en": "Advanced", "fa": "پیشرفته" },
+            "percentage": 90
+          },
+          {
+            "name": "CSS / Tailwind",
+            "level": { "en": "Advanced", "fa": "پیشرفته" },
+            "percentage": 85
+          }
+        ]
+      },
+      {
+        "name": { "en": "Backend & Tools", "fa": "بک‌اند و ابزارها" },
+        "items": [
+          {
+            "name": "REST API",
+            "level": { "en": "Advanced", "fa": "پیشرفته" },
+            "percentage": 80
+          },
+          {
+            "name": "NestJS",
+            "level": { "en": "Intermediate", "fa": "متوسط" },
+            "percentage": 65
+          },
+          {
+            "name": "Prisma",
+            "level": { "en": "Intermediate", "fa": "متوسط" },
+            "percentage": 70
+          },
+          {
+            "name": "Next-Auth",
+            "level": { "en": "Intermediate", "fa": "متوسط" },
+            "percentage": 70
+          },
+          {
+            "name": "GIT",
+            "level": { "en": "Advanced", "fa": "پیشرفته" },
+            "percentage": 80
+          }
+        ]
+      }
+    ],
+    "other": [
+      "Ant Design",
+      "shadcn/ui",
+      "Material UI",
+      "Zod",
+      "Zustand",
+      "Figma",
+      "Figjam",
+      "Trello"
+    ]
+  },
+
+  "projects": [
+    {
+      "id": 1,
+      "name": {
+        "en": "Custom Management System",
+        "fa": "سامانه اختصاصی"
+      },
+      "description": {
+        "en": "A custom order-based system with user registration, resume display, articles, and educational content with communication features. Developed as a team project using Next.js and NestJS. Currently in development and will be published soon.",
+        "fa": "یک سامانه سفارشی با قابلیت ثبت نام کاربران، نمایش رزومه، مقالات و جزوات آموزشی و ایجاد راه‌های ارتباطی. نقش: Full-stack Developer با استفاده از Next.js و NestJS. پروژه به صورت تیمی در حال توسعه بوده و به زودی منتشر خواهد شد."
+      },
+      "tags": ["Next.js", "NestJS", "TypeScript", "Prisma", "Tailwind"],
+      "links": {
+        "code": "",
+        "live": ""
+      },
+      "year": "2025",
+      "featured": true
+    },
+    {
+      "id": 2,
+      "name": {
+        "en": "Madeliran",
+        "fa": "مادلیران"
+      },
+      "description": {
+        "en": "Collaborated remotely on a health-oriented social network. Coordinated with various teams, used Trello for project management, and held online meetings for project goal alignment.",
+        "fa": "همکاری در توسعه یک شبکه اجتماعی سلامت محور به صورت ریموت. به عنوان توسعه‌دهنده فعالیت داشتم. هماهنگی با تیم‌های مختلف، استفاده از Trello و برگزاری جلسات آنلاین برای پیشبرد اهداف پروژه."
+      },
+      "tags": ["React", "TypeScript", "Trello", "Team Collaboration"],
+      "links": {
+        "code": "",
+        "live": "https://madeliran.ir/"
+      },
+      "year": "2024",
+      "featured": true
+    },
+    {
+      "id": 3,
+      "name": {
+        "en": "Co-Website",
+        "fa": "Co-Website"
+      },
+      "description": {
+        "en": "A prototype design inspired by a reference project. Built as a learning exercise to implement modern frontend patterns.",
+        "fa": "یک نمونه طرح اولیه که تحت تأثیر یک پروژه مرجع ساخته شده و تصمیم به پیاده‌سازی آن گرفتم."
+      },
+      "tags": ["React", "Frontend"],
+      "links": {
+        "code": "",
+        "live": "https://co-website.liara.run/"
+      },
+      "year": "2023",
+      "featured": false
+    }
+  ],
+
+  "seo": {
+    "title": {
+      "en": "Morteza Vahdati | Frontend Developer",
+      "fa": "مرتضی وحدتی | توسعه‌دهنده فرانت‌اند"
+    },
+    "description": {
+      "en": "Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive, and performant web applications.",
+      "fa": "توسعه‌دهنده فرانت‌اند متخصص در React، Next.js و TypeScript. طراحی و توسعه برنامه‌های وب مدرن، ریسپانسیو و بهینه."
+    },
+    "keywords": {
+      "en": "frontend developer, react, next.js, typescript, javascript, portfolio, resume",
+      "fa": "توسعه‌دهنده فرانت‌اند, ریکت, نکست, تایپ‌اسکریپت, جاوااسکریپت, رزومه, برنامه‌نویس"
+    }
+  }
+}
