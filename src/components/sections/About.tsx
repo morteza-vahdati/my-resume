@@ -106,10 +106,13 @@ export default function About({ locale }: AboutProps) {
               <i className="fa-solid fa-file-pdf" />
               {locale === "fa" ? "دانلود رزومه" : "Download CV"}
             </LinkButton>
-            <LinkButton href="#contact" variant="outline">
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-transparent text-foreground border-2 border-border font-semibold text-sm hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all duration-300"
+            >
               <i className="fa-solid fa-paper-plane" />
               {letsWork}
-            </LinkButton>
+            </a>
           </div>
         </ScrollReveal>
       </div>
