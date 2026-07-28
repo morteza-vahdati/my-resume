@@ -15,7 +15,7 @@ Input.displayName = "Input"
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(({ className = "", ...props }, ref) => {
-  return <textarea ref={ref} className={`${base} resize-y min-h-[110px] ${className}`} {...props} />
+  return <textarea ref={ref} className={`${base} resize-none min-h-[110px] max-h-[200px] overflow-y-auto ${className}`} style={{ scrollbarGutter: "stable" }} {...props} />
 })
 Textarea.displayName = "Textarea"
 

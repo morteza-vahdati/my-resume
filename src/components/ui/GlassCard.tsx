@@ -13,7 +13,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     return (
       <motion.div
         ref={ref}
-        className={`rounded-xl border border-white/75 dark:border-white/10 bg-white/55 dark:bg-white/5 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] ${className}`}
+        className={`outline-none rounded-xl border border-white/75 dark:border-white/10 bg-white/55 dark:bg-white/5 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] ${className}`}
         {...props}
       >
         {children}

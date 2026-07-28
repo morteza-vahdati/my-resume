@@ -31,7 +31,7 @@ export default function Experience({ locale }: ExperienceProps) {
       </ScrollReveal>
 
       <div className={`relative ${isRtl ? "pl-8" : "pr-8"} rtl:pl-8 rtl:pr-0 flex flex-col gap-8`}>
-        <div className={`absolute ${isRtl ? "left-0" : "right-0"} rtl:right-auto rtl:left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-accent via-accent/60 to-transparent shadow-[0_0_8px_rgba(37,99,235,0.3)]`} />
+        <div className={`absolute ${isRtl ? "left-0" : "right-0"} rtl:right-auto rtl:left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-accent rounded-full via-accent/60 to-transparent shadow-[0_0_8px_rgba(37,99,235,0.3)]`} />
 
         {experience.map((exp, idx) => (
           <ScrollReveal key={exp.id} delay={idx * 0.1}>
