@@ -8,6 +8,7 @@ export type Education = ResumeData["education"][number];
 export type Course = ResumeData["courses"][number];
 export type SkillCategory = ResumeData["skills"]["categories"][number];
 export type Project = ResumeData["projects"][number];
+export type ProjectWithLocale = ReturnType<typeof getProjects>[number];
 export type Social = ResumeData["social"];
 
 export function getResumeData(): ResumeData {
@@ -112,7 +113,9 @@ export function getProjects(locale: Locale) {
   return getResumeData().projects.map((p) => ({
     ...p,
     name: getLocalizedText(p.name, locale),
+    role: getLocalizedText(p.role, locale),
     description: getLocalizedText(p.description, locale),
+    details: (p.details && p.details[locale]) || p.details?.en || [],
     year: locale === "fa" ? toShamsiYear(p.year) : p.year,
   }));
 }

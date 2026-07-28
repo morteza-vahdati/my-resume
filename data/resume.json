@@ -332,9 +332,29 @@
         "en": "Custom Management System",
         "fa": "سامانه اختصاصی"
       },
+      "role": {
+        "en": "Full-stack Developer",
+        "fa": "توسعه‌دهنده فول‌استک"
+      },
       "description": {
         "en": "A custom order-based system with user registration, resume display, articles, and educational content with communication features. Developed as a team project using Next.js and NestJS. Currently in development and will be published soon.",
-        "fa": "یک سامانه سفارشی با قابلیت ثبت نام کاربران، نمایش رزومه، مقالات و جزوات آموزشی و ایجاد راه‌های ارتباطی. نقش: Full-stack Developer با استفاده از Next.js و NestJS. پروژه به صورت تیمی در حال توسعه بوده و به زودی منتشر خواهد شد."
+        "fa": "یک سامانه سفارشی با قابلیت ثبت نام کاربران، نمایش رزومه، مقالات و جزوات آموزشی و ایجاد راه‌های ارتباطی. با استفاده از Next.js و NestJS توسعه داده شده است. پروژه به صورت تیمی در حال توسعه بوده و به زودی منتشر خواهد شد."
+      },
+      "details": {
+        "en": [
+          "Architected full-stack solution with Next.js frontend and NestJS backend",
+          "Implemented user authentication and role-based access control",
+          "Designed database schema with Prisma ORM and PostgreSQL",
+          "Built responsive UI with Tailwind CSS and glassmorphism design",
+          "Managed code quality with TypeScript and ESLint"
+        ],
+        "fa": [
+          "معماری فول‌استک با Next.js و NestJS",
+          "پیاده‌سازی احراز هویت کاربران و کنترل دسترسی نقش‌محور",
+          "طراحی دیتابیس با Prisma و PostgreSQL",
+          "رابط کاربری ریسپانسیو با Tailwind CSS و طراحی شیشه‌ای",
+          "مدیریت کیفیت کد با TypeScript و ESLint"
+        ]
       },
       "tags": ["Next.js", "NestJS", "TypeScript", "Prisma", "Tailwind"],
       "links": {
@@ -350,9 +370,27 @@
         "en": "Madeliran",
         "fa": "مادلیران"
       },
+      "role": {
+        "en": "Frontend Developer",
+        "fa": "توسعه‌دهنده فرانت‌اند"
+      },
       "description": {
         "en": "Collaborated remotely on a health-oriented social network. Coordinated with various teams, used Trello for project management, and held online meetings for project goal alignment.",
-        "fa": "همکاری در توسعه یک شبکه اجتماعی سلامت محور به صورت ریموت. به عنوان توسعه‌دهنده فعالیت داشتم. هماهنگی با تیم‌های مختلف، استفاده از Trello و برگزاری جلسات آنلاین برای پیشبرد اهداف پروژه."
+        "fa": "همکاری در توسعه یک شبکه اجتماعی سلامت محور به صورت ریموت. هماهنگی با تیم‌های مختلف، استفاده از Trello و برگزاری جلسات آنلاین برای پیشبرد اهداف پروژه."
+      },
+      "details": {
+        "en": [
+          "Developed frontend features for a health-focused social platform",
+          "Collaborated remotely with cross-functional teams",
+          "Used Trello for agile project management and sprint planning",
+          "Participated in daily stand-ups and weekly sprint reviews"
+        ],
+        "fa": [
+          "توسعه قابلیت‌های فرانت‌اند برای یک پلتفرم اجتماعی سلامت‌محور",
+          "همکاری ریموت با تیم‌های مختلف",
+          "مدیریت پروژه با Trello و برنامه‌ریزی اسپرینت",
+          "شرکت در جلسات روزانه و مرور اسپرینت هفتگی"
+        ]
       },
       "tags": ["React", "TypeScript", "Trello", "Team Collaboration"],
       "links": {
@@ -368,9 +406,25 @@
         "en": "Co-Website",
         "fa": "Co-Website"
       },
+      "role": {
+        "en": "Frontend Developer",
+        "fa": "توسعه‌دهنده فرانت‌اند"
+      },
       "description": {
         "en": "A prototype design inspired by a reference project. Built as a learning exercise to implement modern frontend patterns.",
         "fa": "یک نمونه طرح اولیه که تحت تأثیر یک پروژه مرجع ساخته شده و تصمیم به پیاده‌سازی آن گرفتم."
+      },
+      "details": {
+        "en": [
+          "Built a complete landing page prototype from scratch",
+          "Implemented modern CSS layout techniques (Flexbox, Grid)",
+          "Focused on clean component architecture and code organization"
+        ],
+        "fa": [
+          "ساخت یک نمونه صفحه فرود کامل از ابتدا",
+          "پیاده‌سازی تکنیک‌های مدرن CSS (Flexbox, Grid)",
+          "تمرکز بر معماری تمیز کامپوننت‌ها و سازماندهی کد"
+        ]
       },
       "tags": ["React", "Frontend"],
       "links": {
