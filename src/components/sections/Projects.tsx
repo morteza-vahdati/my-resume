@@ -1,10 +1,13 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import ScrollReveal from "@/components/ui/ScrollReveal"
 import GlassCard from "@/components/ui/GlassCard"
+import ProjectModal from "@/components/ui/ProjectModal"
 import { getProjects } from "@/lib/resume"
 import type { Locale } from "@/i18config"
+import type { ProjectWithLocale } from "@/lib/resume"
 
 interface ProjectsProps {
   locale: Locale
@@ -17,6 +20,8 @@ const projectCovers = [
 ]
 
 export default function Projects({ locale }: ProjectsProps) {
+  const [selectedProject, setSelectedProject] = useState<ProjectWithLocale | null>(null)
+
   const projects = getProjects(locale)
 
   const label = locale === "fa" ? "چی ساختم" : "What I've built"
@@ -42,7 +47,14 @@ export default function Projects({ locale }: ProjectsProps) {
 
           return (
             <ScrollReveal key={project.id} delay={idx * 0.08}>
-              <GlassCard className={`break-inside-avoid mb-6 cursor-pointer overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-300 group`}>
+              <GlassCard
+                className={`break-inside-avoid mb-6 cursor-pointer overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-[transform,box-shadow] duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30`}
+                onClick={() => setSelectedProject(project)}
+                onKeyDown={(e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelectedProject(project) } }}
+                tabIndex={0}
+                role="button"
+                aria-label={`${locale === "fa" ? "مشاهده جزئیات" : "View details"} ${project.name}`}
+              >
                 <div className={`relative h-44 ${project.featured ? "sm:h-52" : "sm:h-44"} overflow-hidden bg-muted`}>
                   <Image src={cover} alt={project.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
@@ -68,36 +80,14 @@ export default function Projects({ locale }: ProjectsProps) {
                   <p className="text-secondary text-xs leading-relaxed mb-4 line-clamp-3">
                     {project.description}
                   </p>
-                  <div className="flex gap-4 pt-3 border-t border-border">
-                    {project.links.live && (
-                      <a
-                        href={project.links.live}
-                        target="_blank"
-                        rel="noopener"
-                        className="text-xs font-semibold text-accent flex items-center gap-1.5 hover:gap-2.5 transition-all duration-200"
-                      >
-                        <i className="fa-solid fa-arrow-up-right-from-square" />
-                        {locale === "fa" ? "نمایش زنده" : "Live Demo"}
-                      </a>
-                    )}
-                    {project.links.code && (
-                      <a
-                        href={project.links.code}
-                        target="_blank"
-                        rel="noopener"
-                        className="text-xs font-semibold text-accent flex items-center gap-1.5 hover:gap-2.5 transition-all duration-200"
-                      >
-                        <i className="fa-brands fa-github" />
-                        {locale === "fa" ? "مشاهده کد" : "View Code"}
-                      </a>
-                    )}
-                  </div>
                 </div>
               </GlassCard>
             </ScrollReveal>
           )
         })}
       </div>
+
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </section>
   )
 }
