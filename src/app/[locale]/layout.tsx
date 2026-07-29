@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import ThemeProvider from '@/provider/theme-provider'
 import { Locale } from '@/i18config'
 import { getSeo } from '@/lib/resume'
@@ -50,6 +51,7 @@ export default function RootLayout({
           <LoadingScreen />
           {children}
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   )
