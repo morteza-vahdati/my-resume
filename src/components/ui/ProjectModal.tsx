@@ -158,7 +158,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               )}
 
               {(project.links.live || project.links.code) && (
-                <div className={`flex flex-wrap gap-3 pt-5 border-t border-border ${dir === "rtl" ? "justify-start" : "justify-end"}`}>
+                <div className="flex flex-wrap gap-3 pt-5 border-t border-border flex-row-reverse justify-start">
                   {project.links.live && (
                     <a
                       href={project.links.live}
