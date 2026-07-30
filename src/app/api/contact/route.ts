@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 
 const RATE_MAX = 3;
 const RATE_WINDOW = 60_000;
-const MIN_FORM_TIME = 3000;
+const MIN_FORM_TIME = 1000;
 const ALLOWED_ORIGIN = process.env.SITE_URL;
 
 const rateMap = new Map<string, { count: number; resetAt: number }>();
@@ -60,7 +60,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!formLoadedAt || Date.now() - Number(formLoadedAt) < MIN_FORM_TIME) {
+    const loadTime = typeof formLoadedAt === "number" ? formLoadedAt : NaN;
+    if (isNaN(loadTime) || Date.now() - loadTime < MIN_FORM_TIME) {
       return NextResponse.json(
         { error: msg("Invalid request", "درخواست نامعتبر") },
         { status: 400 },
@@ -113,42 +114,43 @@ export async function POST(req: NextRequest) {
     const safeEmail = sanitize(email.trim());
     const safeMessage = sanitize(message.trim());
 
-    const host = process.env.SMTP_HOST;
-    const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
-    const to = process.env.CONTACT_TO;
-    const fromEmail = process.env.FROM_EMAIL;
+    let emailSent = false;
 
-    if (host && user && pass) {
-      const transport = nodemailer.createTransport({
-        host,
-        port: Number(process.env.SMTP_PORT) || 587,
-        secure: false,
-        auth: { user, pass },
-      });
+    if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
+      try {
+        const transport = nodemailer.createTransport({
+          host: process.env.SMTP_HOST,
+          port: Number(process.env.SMTP_PORT) || 587,
+          secure: false,
+          auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+        });
 
-      await transport.sendMail({
-        from: `"Contact Form" <${fromEmail}>`,
-        to,
-        replyTo: safeEmail,
-        subject: `New message from ${safeName}`,
-        html: `
-          <div style="font-family:sans-serif;max-width:540px;margin:0 auto;padding:24px;background:#f9fafb;border-radius:12px;">
-            <h2 style="color:#1f2937;margin-bottom:20px;">📬 New Contact Message</h2>
-            <table style="width:100%;border-collapse:collapse;">
-              <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;width:80px;">Name</td><td style="padding:8px 0;color:#1f2937;font-weight:600;">${safeName}</td></tr>
-              <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Email</td><td style="padding:8px 0;color:#2563eb;">${safeEmail}</td></tr>
-              ${rating ? `<tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Rating</td><td style="padding:8px 0;color:#1f2937;">${"★".repeat(Number(rating))}${"☆".repeat(5 - Number(rating))}</td></tr>` : ""}
-            </table>
-            <div style="margin-top:16px;padding:16px;background:#fff;border-radius:8px;border:1px solid #e5e7eb;">
-              <p style="margin:0;color:#374151;line-height:1.6;white-space:pre-wrap;">${safeMessage}</p>
+        await transport.sendMail({
+          from: `"Contact Form" <${process.env.FROM_EMAIL}>`,
+          to: process.env.CONTACT_TO,
+          replyTo: safeEmail,
+          subject: `New message from ${safeName}`,
+          html: `
+            <div style="font-family:sans-serif;max-width:540px;margin:0 auto;padding:24px;background:#f9fafb;border-radius:12px;">
+              <h2 style="color:#1f2937;margin-bottom:20px;">📬 New Contact Message</h2>
+              <table style="width:100%;border-collapse:collapse;">
+                <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;width:80px;">Name</td><td style="padding:8px 0;color:#1f2937;font-weight:600;">${safeName}</td></tr>
+                <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Email</td><td style="padding:8px 0;color:#2563eb;">${safeEmail}</td></tr>
+                ${rating ? `<tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Rating</td><td style="padding:8px 0;color:#1f2937;">${"★".repeat(Number(rating))}${"☆".repeat(5 - Number(rating))}</td></tr>` : ""}
+              </table>
+              <div style="margin-top:16px;padding:16px;background:#fff;border-radius:8px;border:1px solid #e5e7eb;">
+                <p style="margin:0;color:#374151;line-height:1.6;white-space:pre-wrap;">${safeMessage}</p>
+              </div>
             </div>
-          </div>
-        `,
-      });
+          `,
+        });
+        emailSent = true;
+      } catch (sendErr) {
+        console.error("Email send failed:", sendErr);
+      }
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, emailSent });
   } catch (err) {
     console.error("Contact API error:", err);
     return NextResponse.json(
