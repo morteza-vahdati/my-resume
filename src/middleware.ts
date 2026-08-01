@@ -31,14 +31,29 @@ export function middleware(request: NextRequest) {
 
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
-    return NextResponse.redirect(
+    const locale = getLocale(request) || i18n.defaultLocale;
+    const response = NextResponse.redirect(
       new URL(
         `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
         request.url,
       ),
     );
+    response.cookies.set("locale", locale, { path: "/" });
+    return response;
   }
+
+  const localeFromPath = pathname.split("/")[1];
+  if (
+    i18n.locales.includes(localeFromPath as (typeof i18n)["locales"][number])
+  ) {
+    if (request.cookies.get("locale")?.value !== localeFromPath) {
+      const response = NextResponse.next();
+      response.cookies.set("locale", localeFromPath, { path: "/" });
+      return response;
+    }
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {

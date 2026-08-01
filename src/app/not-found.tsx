@@ -1,9 +1,8 @@
 import Link from "next/link"
-import { headers } from "next/headers"
+import { cookies } from "next/headers"
 
 export default function NotFound() {
-  const acceptLang = headers().get("accept-language") || "en"
-  const locale = acceptLang.startsWith("fa") ? "fa" : "en"
+  const locale = cookies().get("locale")?.value === "fa" ? "fa" : "en"
   const isRtl = locale === "fa"
 
   return (
