@@ -1,4 +1,4 @@
-import { cookies } from "next/headers"
+import { cookies, headers } from "next/headers"
 import ThemeProvider from "@/provider/theme-provider"
 import { iransansfanum } from "@/lib/iransans-font"
 import "./globals.css"
@@ -8,7 +8,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const locale = cookies().get("locale")?.value === "fa" ? "fa" : "en"
+  const rawLocale =
+    headers().get("x-locale") || cookies().get("locale")?.value || ""
+  const locale = rawLocale === "fa" ? "fa" : "en"
   const dir = locale === "fa" ? "rtl" : "ltr"
 
   return (

@@ -31,7 +31,12 @@ export function middleware(request: NextRequest) {
 
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(request) || i18n.defaultLocale;
+    const cookieLocale = request.cookies.get("locale")?.value;
+    const locale =
+      (cookieLocale &&
+      i18n.locales.includes(cookieLocale as (typeof i18n)["locales"][number])
+        ? cookieLocale
+        : getLocale(request)) || i18n.defaultLocale;
     const response = NextResponse.redirect(
       new URL(
         `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
@@ -46,11 +51,15 @@ export function middleware(request: NextRequest) {
   if (
     i18n.locales.includes(localeFromPath as (typeof i18n)["locales"][number])
   ) {
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-locale", localeFromPath);
+    const response = NextResponse.next({
+      request: { headers: requestHeaders },
+    });
     if (request.cookies.get("locale")?.value !== localeFromPath) {
-      const response = NextResponse.next();
       response.cookies.set("locale", localeFromPath, { path: "/" });
-      return response;
     }
+    return response;
   }
 
   return NextResponse.next();
