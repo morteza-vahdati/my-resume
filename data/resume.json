@@ -5,8 +5,8 @@
       "fa": "مرتضی وحدتی"
     },
     "role": {
-      "en": "Frontend Developer",
-      "fa": "برنامه‌نویس فرانت‌اند"
+      "en": "Web Developer",
+      "fa": "برنامه‌نویس وب"
     },
     "email": "mvahdati1382@gmail.com",
     "phone": "09367635074",
@@ -74,8 +74,8 @@
       ]
     },
     "about": {
-      "en": "Frontend developer with experience in designing and implementing modern and responsive user interfaces. Experienced in team projects with a focus on improving user experience and code quality. Passionate about continuous learning and upgrading technical skills. Currently seeking a new job opportunity for professional growth and effective collaboration in software development teams.",
-      "fa": "توسعه‌دهنده فرانت‌اند با تجربه در طراحی و پیاده‌سازی رابط‌های کاربری مدرن و ریسپانسیو. سابقه همکاری در پروژه‌های تیمی و تمرکز بر بهبود تجربه کاربری و کیفیت کد. به یادگیری مستمر و ارتقای مهارت‌های فنی علاقه‌مند هستم. در حال حاضر به دنبال فرصت شغلی جدید برای رشد حرفه‌ای و مشارکت مؤثر در تیم‌های توسعه نرم‌افزار می‌باشم."
+      "en": "Web developer with experience in designing and implementing modern and responsive user interfaces. Experienced in team projects with a focus on improving user experience and code quality. Passionate about continuous learning and upgrading technical skills. Currently seeking a new job opportunity for professional growth and effective collaboration in software development teams.",
+      "fa": "توسعه‌دهنده وب با تجربه در طراحی و پیاده‌سازی رابط‌های کاربری مدرن و ریسپانسیو. سابقه همکاری در پروژه‌های تیمی و تمرکز بر بهبود تجربه کاربری و کیفیت کد. به یادگیری مستمر و ارتقای مهارت‌های فنی علاقه‌مند هستم. در حال حاضر به دنبال فرصت شغلی جدید برای رشد حرفه‌ای و مشارکت مؤثر در تیم‌های توسعه نرم‌افزار می‌باشم."
     },
     "photo": "/images/avatar.jpg",
     "resumePdf": {
@@ -95,8 +95,8 @@
     {
       "id": 1,
       "title": {
-        "en": "Frontend Developer",
-        "fa": "برنامه‌نویس فرانت‌اند"
+        "en": "Web Developer",
+        "fa": "برنامه‌نویس وب"
       },
       "company": {
         "en": "Dade Pardazan Bonyan Ava",
@@ -136,8 +136,8 @@
     {
       "id": 2,
       "title": {
-        "en": "Frontend Developer",
-        "fa": "برنامه‌نویس فرانت‌اند"
+        "en": "Web Developer",
+        "fa": "برنامه‌نویس وب"
       },
       "company": {
         "en": "Dade Varzan Novin Shayan",
@@ -253,7 +253,7 @@
   "skills": {
     "categories": [
       {
-        "name": { "en": "Frontend", "fa": "فرانت‌اند" },
+        "name": { "en": "Web Development", "fa": "توسعه وب" },
         "items": [
           {
             "name": "React",
@@ -328,6 +328,7 @@
   "projects": [
     {
       "id": 1,
+      "slug": "academist",
       "name": {
         "en": "Custom Management System",
         "fa": "سامانه اختصاصی"
@@ -362,17 +363,19 @@
         "live": ""
       },
       "year": "2025",
-      "featured": true
+      "featured": true,
+      "images": ["/images/projects/academist/_cover.png", "/images/projects/academist/dashboard.png", "/images/projects/academist/faq.png"]
     },
     {
       "id": 2,
+      "slug": "madeliran",
       "name": {
         "en": "Madeliran",
         "fa": "مادلیران"
       },
       "role": {
-        "en": "Frontend Developer",
-        "fa": "توسعه‌دهنده فرانت‌اند"
+        "en": "Web Developer",
+        "fa": "توسعه‌دهنده وب"
       },
       "description": {
         "en": "Collaborated remotely on a health-oriented social network. Coordinated with various teams, used Trello for project management, and held online meetings for project goal alignment.",
@@ -380,13 +383,13 @@
       },
       "details": {
         "en": [
-          "Developed frontend features for a health-focused social platform",
+          "Developed web features for a health-focused social platform",
           "Collaborated remotely with cross-functional teams",
           "Used Trello for agile project management and sprint planning",
           "Participated in daily stand-ups and weekly sprint reviews"
         ],
         "fa": [
-          "توسعه قابلیت‌های فرانت‌اند برای یک پلتفرم اجتماعی سلامت‌محور",
+          "توسعه قابلیت‌های وب برای یک پلتفرم اجتماعی سلامت‌محور",
           "همکاری ریموت با تیم‌های مختلف",
           "مدیریت پروژه با Trello و برنامه‌ریزی اسپرینت",
           "شرکت در جلسات روزانه و مرور اسپرینت هفتگی"
@@ -398,17 +401,19 @@
         "live": "https://madeliran.ir/"
       },
       "year": "2024",
-      "featured": true
+      "featured": true,
+      "images": ["/images/projects/madeliran/_cover.png", "/images/projects/madeliran/about.png", "/images/projects/madeliran/bazar.png", "/images/projects/madeliran/home.png", "/images/projects/madeliran/media.png"]
     },
     {
       "id": 3,
+      "slug": "co-website",
       "name": {
         "en": "Co-Website",
         "fa": "Co-Website"
       },
       "role": {
-        "en": "Frontend Developer",
-        "fa": "توسعه‌دهنده فرانت‌اند"
+        "en": "Web Developer",
+        "fa": "توسعه‌دهنده وب"
       },
       "description": {
         "en": "A prototype design inspired by a reference project. Built as a learning exercise to implement modern frontend patterns.",
@@ -426,28 +431,29 @@
           "تمرکز بر معماری تمیز کامپوننت‌ها و سازماندهی کد"
         ]
       },
-      "tags": ["React", "Frontend"],
+      "tags": ["React", "Web"],
       "links": {
         "code": "",
         "live": "https://co-website.liara.run/"
       },
       "year": "2023",
-      "featured": false
+      "featured": false,
+      "images": ["/images/projects/co-website/_cover.png"]
     }
   ],
 
   "seo": {
     "title": {
-      "en": "Morteza Vahdati | Frontend Developer",
-      "fa": "مرتضی وحدتی | توسعه‌دهنده فرانت‌اند"
+      "en": "Morteza Vahdati | Web Developer",
+      "fa": "مرتضی وحدتی | توسعه‌دهنده وب"
     },
     "description": {
-      "en": "Frontend developer specializing in React, Next.js, and TypeScript. Building modern, responsive, and performant web applications.",
-      "fa": "توسعه‌دهنده فرانت‌اند متخصص در React، Next.js و TypeScript. طراحی و توسعه برنامه‌های وب مدرن، ریسپانسیو و بهینه."
+      "en": "Web developer specializing in React, Next.js, and TypeScript. Building modern, responsive, and performant web applications.",
+      "fa": "توسعه‌دهنده وب متخصص در React، Next.js و TypeScript. طراحی و توسعه برنامه‌های وب مدرن، ریسپانسیو و بهینه."
     },
     "keywords": {
-      "en": "frontend developer, react, next.js, typescript, javascript, portfolio, resume",
-      "fa": "توسعه‌دهنده فرانت‌اند, ریکت, نکست, تایپ‌اسکریپت, جاوااسکریپت, رزومه, برنامه‌نویس"
+      "en": "web developer, react, next.js, typescript, javascript, portfolio, resume",
+      "fa": "توسعه‌دهنده وب, ریکت, نکست, تایپ‌اسکریپت, جاوااسکریپت, رزومه, برنامه‌نویس"
     }
   }
 }

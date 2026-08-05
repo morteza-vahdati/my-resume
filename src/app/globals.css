@@ -23,8 +23,8 @@
     --ring: 217 91% 60%;
     --radius: 0.7rem;
 
-    --color-glass-bg: 0 0% 100% / 0.55;
-    --color-glass-bdr: 0 0% 100% / 0.75;
+    --color-glass-bg: hsla(0, 0%, 100%, 0.55);
+    --color-glass-bdr: hsla(0, 0%, 100%, 0.75);
     --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
     --shadow-lift: 0 20px 60px rgba(0, 0, 0, 0.12);
   }
@@ -48,8 +48,8 @@
     --input: 240 4% 16%;
     --ring: 217 91% 60%;
 
-    --color-glass-bg: 240 6% 10% / 0.6;
-    --color-glass-bdr: 255 255 255 / 0.08;
+    --color-glass-bg: hsl(240 6% 10% / 0.6);
+    --color-glass-bdr: hsl(0 0% 100% / 0.08);
     --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4);
     --shadow-lift: 0 20px 60px rgba(0, 0, 0, 0.5);
   }
@@ -63,7 +63,14 @@
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
-    scroll-padding-top: 32px;
+    scrollbar-gutter: stable;
+    scroll-padding-top: 56px;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 64px;
+    }
   }
 
   body {
@@ -155,6 +162,16 @@
 @keyframes spinSlow {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes projectProgress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
   }
 }
 

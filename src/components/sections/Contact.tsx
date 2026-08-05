@@ -4,10 +4,12 @@ import { useState, useRef, useCallback, useEffect, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import ScrollReveal from "@/components/ui/ScrollReveal"
 import GlassCard from "@/components/ui/GlassCard"
+import SectionHeader from "@/components/ui/SectionHeader"
 import Button from "@/components/ui/Button"
 import { Input, Textarea } from "@/components/ui/Input"
 import Rating from "@/components/ui/Rating"
 import Toast, { type ToastData } from "@/components/ui/Toast"
+import { getResumeData } from "@/lib/resume"
 
 interface ContactProps {
   locale: "en" | "fa"
@@ -31,6 +33,7 @@ interface FormErrors {
 
 export default function Contact({ locale }: ContactProps) {
   const isRtl = locale === "fa"
+  const social = getResumeData().social
 
   const t = useMemo(() => ({
     label: isRtl ? "بیایید حرف بزنیم" : "Let's talk",
@@ -149,16 +152,7 @@ export default function Contact({ locale }: ContactProps) {
 
   return (
     <section id="contact" className="px-4 sm:px-8 py-[clamp(3.5rem,8vw,6rem)] max-w-6xl mx-auto">
-      <ScrollReveal>
-        <span className="text-[0.72rem] font-bold tracking-[2px] uppercase text-accent mb-2 block">
-          {t.label}
-        </span>
-        <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-black tracking-[-1.5px] leading-tight text-foreground mb-3 font-display">
-          {t.title}
-        </h2>
-        <div className="w-10 h-[3px] bg-accent rounded-full mb-4" />
-        <p className="text-muted-foreground mb-14">{t.sub}</p>
-      </ScrollReveal>
+      <SectionHeader label={t.label} title={t.title} subtitle={t.sub} />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 items-start">
         <ScrollReveal direction="left">
@@ -169,7 +163,7 @@ export default function Contact({ locale }: ContactProps) {
 
           <div className="flex flex-col gap-3">
             <a
-              href="mailto:mvahdati1382@gmail.com"
+              href={`mailto:${social.email}`}
               className="flex items-center gap-4 p-3.5 rounded-xl border border-border text-secondary hover:border-accent hover:text-accent hover:bg-accent/5 hover:translate-x-1 rtl:hover:-translate-x-1 transition-all duration-300"
             >
               <div className="w-[38px] h-[38px] rounded-lg bg-muted flex items-center justify-center text-accent flex-shrink-0">
@@ -177,13 +171,13 @@ export default function Contact({ locale }: ContactProps) {
               </div>
               <div>
                 <div className="text-[0.7rem] text-muted-foreground">{t.email}</div>
-                <div className="text-sm font-semibold">mvahdati1382@gmail.com</div>
+                <div className="text-sm font-semibold">{social.email}</div>
               </div>
             </a>
             <a
-              href="https://linkedin.com/in/mvahdati"
+              href={social.linkedin}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="flex items-center gap-4 p-3.5 rounded-xl border border-border text-secondary hover:border-accent hover:text-accent hover:bg-accent/5 hover:translate-x-1 rtl:hover:-translate-x-1 transition-all duration-300"
             >
               <div className="w-[38px] h-[38px] rounded-lg bg-muted flex items-center justify-center text-accent flex-shrink-0">
@@ -191,13 +185,13 @@ export default function Contact({ locale }: ContactProps) {
               </div>
               <div>
                 <div className="text-[0.7rem] text-muted-foreground">LinkedIn</div>
-                <div className="text-sm font-semibold">linkedin.com/in/mvahdati</div>
+                <div className="text-sm font-semibold">{social.linkedin.replace("https://", "")}</div>
               </div>
             </a>
             <a
-              href="https://github.com/mvahdati"
+              href={social.github}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="flex items-center gap-4 p-3.5 rounded-xl border border-border text-secondary hover:border-accent hover:text-accent hover:bg-accent/5 hover:translate-x-1 rtl:hover:-translate-x-1 transition-all duration-300"
             >
               <div className="w-[38px] h-[38px] rounded-lg bg-muted flex items-center justify-center text-accent flex-shrink-0">
@@ -205,32 +199,32 @@ export default function Contact({ locale }: ContactProps) {
               </div>
               <div>
                 <div className="text-[0.7rem] text-muted-foreground">GitHub</div>
-                <div className="text-sm font-semibold">github.com/mvahdati</div>
+                <div className="text-sm font-semibold">{social.github.replace("https://", "")}</div>
               </div>
             </a>
           </div>
 
           <div className="flex gap-2.5 mt-6">
             <a
-              href="https://github.com/mvahdati"
+              href={social.github}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-secondary hover:bg-accent hover:border-accent hover:text-white hover:-translate-y-0.5 transition-all duration-300"
               aria-label="GitHub"
             >
               <i className="fa-brands fa-github" />
             </a>
             <a
-              href="https://linkedin.com/in/mvahdati"
+              href={social.linkedin}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-secondary hover:bg-accent hover:border-accent hover:text-white hover:-translate-y-0.5 transition-all duration-300"
               aria-label="LinkedIn"
             >
               <i className="fa-brands fa-linkedin" />
             </a>
             <a
-              href="mailto:mvahdati1382@gmail.com"
+              href={`mailto:${social.email}`}
               className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-secondary hover:bg-accent hover:border-accent hover:text-white hover:-translate-y-0.5 transition-all duration-300"
               aria-label="Email"
             >

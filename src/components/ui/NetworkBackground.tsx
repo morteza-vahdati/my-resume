@@ -20,35 +20,44 @@ export default function NetworkBackground() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
+    let nodes: Node[] = []
+    let animId: number | null = null
+    let time = 0
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    const isMobile = () => window.innerWidth < 768
+
     const resize = () => {
-      canvas.width = window.innerWidth * 2
-      canvas.height = window.innerHeight * 2
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      canvas.width = window.innerWidth * dpr
+      canvas.height = window.innerHeight * dpr
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
     resize()
-    window.addEventListener("resize", resize)
 
-    const nodeCount = 32
-    const nodes: Node[] = Array.from({ length: nodeCount }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      radius: Math.random() * 4 + 2,
-      pulse: Math.random() * Math.PI * 2,
-    }))
-
-    let animId: number
-    let time = 0
+    const createNodes = () => {
+      const count = isMobile() ? 16 : 32
+      nodes = Array.from({ length: count }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        radius: Math.random() * 4 + 2,
+        pulse: Math.random() * Math.PI * 2,
+      }))
+    }
+    createNodes()
 
     const draw = () => {
       time += 0.01
-      const w = canvas.width
-      const h = canvas.height
+      const w = window.innerWidth
+      const h = window.innerHeight
       ctx.clearRect(0, 0, w, h)
 
       const isDark = document.documentElement.classList.contains("dark")
       const accent = isDark ? "59, 130, 246" : "37, 99, 235"
-      const accent2 = isDark ? "99, 102, 241" : "99, 102, 241"
+      const accent2 = "99, 102, 241"
+      const maxDist = isMobile() ? 150 : 220
 
       nodes.forEach((node) => {
         node.x += node.vx
@@ -63,7 +72,6 @@ export default function NetworkBackground() {
           const dx = nodes[i].x - nodes[j].x
           const dy = nodes[i].y - nodes[j].y
           const dist = Math.sqrt(dx * dx + dy * dy)
-          const maxDist = 220
           if (dist < maxDist) {
             const alpha = (1 - dist / maxDist) * 0.35
             const gradient = ctx.createLinearGradient(
@@ -100,15 +108,34 @@ export default function NetworkBackground() {
         ctx.fillStyle = `rgba(255, 255, 255, 0.3)`
         ctx.fill()
       })
-
-      animId = requestAnimationFrame(draw)
     }
 
-    draw()
+    if (reducedMotion) {
+      draw()
+    } else {
+      const loop = () => {
+        draw()
+        animId = requestAnimationFrame(loop)
+      }
+      animId = requestAnimationFrame(loop)
+    }
+
+    let resizeTimer: ReturnType<typeof setTimeout> | undefined
+    const onResize = () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        const wasMobile = nodes.length <= 16
+        resize()
+        if (wasMobile !== isMobile()) createNodes()
+        if (reducedMotion) draw()
+      }, 150)
+    }
+    window.addEventListener("resize", onResize)
 
     return () => {
-      cancelAnimationFrame(animId)
-      window.removeEventListener("resize", resize)
+      if (animId !== null) cancelAnimationFrame(animId)
+      clearTimeout(resizeTimer)
+      window.removeEventListener("resize", onResize)
     }
   }, [])
 

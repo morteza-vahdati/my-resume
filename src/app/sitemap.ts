@@ -1,10 +1,11 @@
-import { MetadataRoute } from "next"
-import { i18n } from "@/i18config"
+import { i18n } from "@/i18config";
+import { MetadataRoute } from "next";
+import { siteConfig } from "@/lib/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://mvahdati.ir"
+  const baseUrl = siteConfig.url;
 
-  const entries: MetadataRoute.Sitemap = []
+  const entries: MetadataRoute.Sitemap = [];
 
   for (const locale of i18n.locales) {
     entries.push({
@@ -12,8 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
-    })
+    });
   }
 
-  return entries
+  return entries;
 }

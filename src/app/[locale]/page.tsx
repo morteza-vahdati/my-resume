@@ -8,6 +8,7 @@ import Education from "@/components/sections/Education"
 import Projects from "@/components/sections/Projects"
 import Contact from "@/components/sections/Contact"
 import NetworkBackground from "@/components/ui/NetworkBackground"
+import ScrollToHash from "@/components/ui/ScrollToHash"
 import { Locale } from "@/i18config"
 import JsonLd from "@/components/JsonLd"
 
@@ -15,6 +16,7 @@ export default function Page({ params: { locale } }: { params: { locale: Locale 
   return (
     <>
       <JsonLd locale={locale} />
+      <ScrollToHash />
       <NetworkBackground />
       <div className="fixed inset-0 z-[1] pointer-events-none overflow-hidden">
         <div className="absolute w-[700px] h-[700px] rounded-full blur-[100px] bg-[rgba(37,99,235,0.06)] dark:bg-[rgba(59,130,246,0.08)] -top-[20%] -left-[15%] animate-[blobDrift_25s_ease-in-out_infinite]" />

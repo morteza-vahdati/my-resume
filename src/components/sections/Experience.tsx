@@ -3,6 +3,7 @@
 import ScrollReveal from "@/components/ui/ScrollReveal"
 import GlassCard from "@/components/ui/GlassCard"
 import Badge from "@/components/ui/Badge"
+import SectionHeader from "@/components/ui/SectionHeader"
 import { getExperience } from "@/lib/resume"
 import type { Locale } from "@/i18config"
 
@@ -20,15 +21,7 @@ export default function Experience({ locale }: ExperienceProps) {
 
   return (
     <section id="experience" className="px-4 sm:px-8 py-[clamp(3.5rem,8vw,6rem)] max-w-6xl mx-auto">
-      <ScrollReveal>
-        <span className="text-[0.72rem] font-bold tracking-[2px] uppercase text-accent mb-2 block">
-          {label}
-        </span>
-        <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-black tracking-[-1.5px] leading-tight text-foreground mb-3 font-display">
-          {title}
-        </h2>
-        <div className="w-10 h-[3px] bg-accent rounded-full mb-4" />
-      </ScrollReveal>
+      <SectionHeader label={label} title={title} />
 
       <div className={`relative ${isRtl ? "pl-8" : "pr-8"} rtl:pl-8 rtl:pr-0 flex flex-col gap-8`}>
         <div className={`absolute ${isRtl ? "left-0" : "right-0"} rtl:right-auto rtl:left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-accent rounded-full via-accent/60 to-transparent shadow-[0_0_8px_rgba(37,99,235,0.3)]`} />

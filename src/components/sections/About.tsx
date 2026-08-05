@@ -3,6 +3,7 @@
 import Image from "next/image"
 import ScrollReveal from "@/components/ui/ScrollReveal"
 import GlassCard from "@/components/ui/GlassCard"
+import SectionHeader from "@/components/ui/SectionHeader"
 import LinkButton from "@/components/ui/LinkButton"
 import { getPersonal } from "@/lib/resume"
 import type { Locale } from "@/i18config"
@@ -22,15 +23,7 @@ export default function About({ locale }: AboutProps) {
 
   return (
     <section id="about" className="px-4 sm:px-8 py-[clamp(3.5rem,8vw,6rem)] max-w-6xl mx-auto">
-      <ScrollReveal>
-        <span className="text-[0.72rem] font-bold tracking-[2px] uppercase text-accent mb-2 block">
-          {sectionLabel}
-        </span>
-        <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-black tracking-[-1.5px] leading-tight text-foreground mb-3 font-display">
-          {sectionTitle}
-        </h2>
-        <div className="w-10 h-[3px] bg-accent rounded-full mb-4" />
-      </ScrollReveal>
+      <SectionHeader label={sectionLabel} title={sectionTitle} />
 
       <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-12 items-start">
         <ScrollReveal direction="left">
@@ -106,13 +99,10 @@ export default function About({ locale }: AboutProps) {
               <i className="fa-solid fa-file-pdf" />
               {locale === "fa" ? "دانلود رزومه" : "Download CV"}
             </LinkButton>
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-transparent text-foreground border-2 border-border font-semibold text-sm hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all duration-300"
-            >
+            <LinkButton href="#contact" variant="outline">
               <i className="fa-solid fa-paper-plane" />
               {letsWork}
-            </a>
+            </LinkButton>
           </div>
         </ScrollReveal>
       </div>

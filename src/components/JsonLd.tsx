@@ -1,9 +1,11 @@
 import { getResumeData, getLocalizedText } from "@/lib/resume"
+import { siteConfig } from "@/lib/site-config"
 import type { Locale } from "@/i18config"
 
 export default function JsonLd({ locale }: { locale: Locale }) {
   const data = getResumeData()
   const personal = data.personal
+  const social = data.social
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -18,8 +20,8 @@ export default function JsonLd({ locale }: { locale: Locale }) {
       c.items.map((i) => i.name)
     ),
     knowsLanguage: personal.languages.map((l) => l.name.en),
-    url: "https://mvahdati.ir",
-    sameAs: ["https://github.com/mvahdati", "https://linkedin.com/in/mvahdati"],
+    url: siteConfig.url,
+    sameAs: [social.github, social.linkedin],
   }
 
   return (

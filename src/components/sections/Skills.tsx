@@ -4,6 +4,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal"
 import SkillBar from "@/components/ui/SkillBar"
 import GlassCard from "@/components/ui/GlassCard"
 import Badge from "@/components/ui/Badge"
+import SectionHeader from "@/components/ui/SectionHeader"
 import { getSkills } from "@/lib/resume"
 import type { Locale } from "@/i18config"
 
@@ -21,16 +22,7 @@ export default function Skills({ locale }: SkillsProps) {
 
   return (
     <section id="skills" className="px-4 sm:px-8 py-[clamp(3.5rem,8vw,6rem)] max-w-6xl mx-auto">
-      <ScrollReveal>
-        <span className="text-[0.72rem] font-bold tracking-[2px] uppercase text-accent mb-2 block">
-          {label}
-        </span>
-        <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-black tracking-[-1.5px] leading-tight text-foreground mb-3 font-display">
-          {title}
-        </h2>
-        <div className="w-10 h-[3px] bg-accent rounded-full mb-4" />
-        <p className="text-muted-foreground mb-14">{sub}</p>
-      </ScrollReveal>
+      <SectionHeader label={label} title={title} subtitle={sub} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {skills.categories.map((cat, idx) => (

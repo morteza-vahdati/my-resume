@@ -157,13 +157,10 @@ export default function Hero({ locale }: HeroProps) {
             transition={{ duration: 0.7, delay: 0.5 }}
             className={`flex gap-3 justify-center ${isRtl ? "lg:justify-end" : "lg:justify-start"} flex-wrap mt-8`}
           >
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-accent text-white font-semibold text-sm shadow-[0_4px_14px_rgba(37,99,235,0.3)] hover:bg-[#1D4ED8] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(37,99,235,0.4)] transition-all duration-300"
-            >
+            <LinkButton href="#contact" variant="primary">
               <i className="fa-solid fa-paper-plane" />
               {t.cta}
-            </a>
+            </LinkButton>
             <LinkButton href={personal.resumePdf} download variant="outline">
               <i className="fa-solid fa-file-arrow-down" />
               {t.dl}
