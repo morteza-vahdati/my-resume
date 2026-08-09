@@ -34,6 +34,7 @@ yarn-error.log*
 
 # agent/skill files
 .agents/
+.claude/
 .opencode/
 skills-lock.json
 
