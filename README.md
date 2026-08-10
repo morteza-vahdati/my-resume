@@ -12,9 +12,9 @@ A bilingual (English / Persian) single-page resume site, built with the Next.js 
 
 <div align="center">
 
-|                  Light — English                  |                 Dark — Persian                  |
-| :-----------------------------------------------: | :---------------------------------------------: |
-| ![English, light mode](screenshots/home-en-light.png) | ![Persian, dark mode](screenshots/home-fa-dark.png) |
+|                        Light                        |                         Dark                          |
+| :-------------------------------------------------: | :---------------------------------------------------: |
+| ![light mode](public/images/screenshot/en/hero.png) | ![dark mode](public/images/screenshot/en/contact.png) |
 
 </div>
 
