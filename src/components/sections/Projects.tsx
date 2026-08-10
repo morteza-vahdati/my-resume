@@ -31,7 +31,7 @@ export default function Projects({ locale }: ProjectsProps) {
         {projects.map((project, idx) => (
           <ScrollReveal key={project.id} delay={idx * 0.08}>
             <GlassCard
-              className={`h-full cursor-pointer overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-[transform,box-shadow] duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30`}
+              className={`h-full cursor-pointer overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-[transform,box-shadow] duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30`}
               onClick={() => setSelectedProject(project)}
               onKeyDown={(e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelectedProject(project) } }}
               tabIndex={0}
@@ -67,7 +67,7 @@ export default function Projects({ locale }: ProjectsProps) {
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <div className="flex items-center gap-2 mb-1.5">
-                  <div className="w-2 h-2 rounded-full bg-accent" />
+                  <div className="w-2 h-2 rounded-full bg-primary" />
                   <span className="text-xs text-muted-foreground font-medium">{project.year}</span>
                 </div>
                 <h3 className="text-base font-bold text-foreground mb-1.5 tracking-tight">

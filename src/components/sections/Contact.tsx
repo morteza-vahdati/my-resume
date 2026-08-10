@@ -103,7 +103,7 @@ export default function Contact({ locale }: ContactProps) {
           email: form.email.trim(),
           message: form.message.trim(),
           honeypot: honeypotRef.current?.value || "",
-          formLoadedAt: formLoadedAt.current,
+          elapsedMs: Date.now() - formLoadedAt.current,
         }),
       })
 
@@ -118,12 +118,11 @@ export default function Contact({ locale }: ContactProps) {
         if (res.status === 429) {
           setToast({ message: pick(data.error, t.rateLimitMsg), type: "error" })
         } else if (data.errors) {
-          const localized: Record<string, string> = {}
-          for (const key of Object.keys(data.errors)) {
-            localized[key] = pick(data.errors[key], data.errors[key]?.en || "")
+          const localized: FormErrors = {}
+          for (const key of Object.keys(data.errors) as (keyof FormErrors)[]) {
+            localized[key] = pick(data.errors[key], t.errorMsg)
           }
           setErrors(localized)
-          setStatus("error")
         } else {
           setToast({ message: pick(data.error, t.errorMsg), type: "error" })
         }
@@ -164,9 +163,9 @@ export default function Contact({ locale }: ContactProps) {
           <div className="flex flex-col gap-3">
             <a
               href={`mailto:${social.email}`}
-              className="flex items-center gap-4 p-3.5 rounded-xl border border-border text-secondary hover:border-accent hover:text-accent hover:bg-accent/5 hover:translate-x-1 rtl:hover:-translate-x-1 transition-all duration-300"
+              className="flex items-center gap-4 p-3.5 rounded-xl border border-border text-secondary hover:border-primary hover:text-primary hover:bg-primary/5 hover:translate-x-1 rtl:hover:-translate-x-1 transition-all duration-300"
             >
-              <div className="w-[38px] h-[38px] rounded-lg bg-muted flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-[38px] h-[38px] rounded-lg bg-muted flex items-center justify-center text-primary flex-shrink-0">
                 <i className="fa-solid fa-envelope" />
               </div>
               <div>
@@ -178,9 +177,9 @@ export default function Contact({ locale }: ContactProps) {
               href={social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 p-3.5 rounded-xl border border-border text-secondary hover:border-accent hover:text-accent hover:bg-accent/5 hover:translate-x-1 rtl:hover:-translate-x-1 transition-all duration-300"
+              className="flex items-center gap-4 p-3.5 rounded-xl border border-border text-secondary hover:border-primary hover:text-primary hover:bg-primary/5 hover:translate-x-1 rtl:hover:-translate-x-1 transition-all duration-300"
             >
-              <div className="w-[38px] h-[38px] rounded-lg bg-muted flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-[38px] h-[38px] rounded-lg bg-muted flex items-center justify-center text-primary flex-shrink-0">
                 <i className="fa-brands fa-linkedin" />
               </div>
               <div>
@@ -192,9 +191,9 @@ export default function Contact({ locale }: ContactProps) {
               href={social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 p-3.5 rounded-xl border border-border text-secondary hover:border-accent hover:text-accent hover:bg-accent/5 hover:translate-x-1 rtl:hover:-translate-x-1 transition-all duration-300"
+              className="flex items-center gap-4 p-3.5 rounded-xl border border-border text-secondary hover:border-primary hover:text-primary hover:bg-primary/5 hover:translate-x-1 rtl:hover:-translate-x-1 transition-all duration-300"
             >
-              <div className="w-[38px] h-[38px] rounded-lg bg-muted flex items-center justify-center text-accent flex-shrink-0">
+              <div className="w-[38px] h-[38px] rounded-lg bg-muted flex items-center justify-center text-primary flex-shrink-0">
                 <i className="fa-brands fa-github" />
               </div>
               <div>
@@ -209,7 +208,7 @@ export default function Contact({ locale }: ContactProps) {
               href={social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-secondary hover:bg-accent hover:border-accent hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+              className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-secondary hover:bg-primary hover:border-primary hover:text-white hover:-translate-y-0.5 transition-all duration-300"
               aria-label="GitHub"
             >
               <i className="fa-brands fa-github" />
@@ -218,14 +217,14 @@ export default function Contact({ locale }: ContactProps) {
               href={social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-secondary hover:bg-accent hover:border-accent hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+              className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-secondary hover:bg-primary hover:border-primary hover:text-white hover:-translate-y-0.5 transition-all duration-300"
               aria-label="LinkedIn"
             >
               <i className="fa-brands fa-linkedin" />
             </a>
             <a
               href={`mailto:${social.email}`}
-              className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-secondary hover:bg-accent hover:border-accent hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+              className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-secondary hover:bg-primary hover:border-primary hover:text-white hover:-translate-y-0.5 transition-all duration-300"
               aria-label="Email"
             >
               <i className="fa-solid fa-envelope" />
@@ -250,7 +249,7 @@ export default function Contact({ locale }: ContactProps) {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: "spring", stiffness: 250, damping: 18, delay: 0.2 }}
-                      className="w-16 h-16 rounded-2xl bg-accent/15 flex items-center justify-center text-accent"
+                      className="w-16 h-16 rounded-2xl bg-primary/15 flex items-center justify-center text-primary"
                     >
                       <i className="fa-solid fa-check text-2xl" />
                     </motion.div>

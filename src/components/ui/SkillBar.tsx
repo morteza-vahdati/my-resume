@@ -15,12 +15,12 @@ export default function SkillBar({ name, percentage, level, delay = 0 }: SkillBa
     <div className="mb-4">
       <div className="flex justify-between mb-1.5">
         <span className="text-sm font-semibold text-foreground">{name}</span>
-        <span className="text-xs font-bold text-accent">{level}</span>
+        <span className="text-xs font-bold text-primary">{level}</span>
       </div>
       <Tooltip content={`${percentage}%`}>
         <div className="h-2 bg-muted rounded-full overflow-hidden cursor-pointer">
           <motion.div
-            className="h-full rounded-full bg-accent"
+            className="h-full rounded-full bg-primary"
             initial={{ width: "0%" }}
             whileInView={{ width: `${percentage}%` }}
             viewport={{ once: true }}

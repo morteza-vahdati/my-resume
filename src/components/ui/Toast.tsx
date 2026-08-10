@@ -32,9 +32,9 @@ const config: Record<ToastType, { icon: string; bg: string; border: string; colo
   },
   info: {
     icon: "fa-circle-info",
-    bg: "rgba(37,99,235,0.12)",
-    border: "rgba(37,99,235,0.25)",
-    color: "rgb(37,99,235)",
+    bg: "rgba(var(--primary-rgb),0.12)",
+    border: "rgba(var(--primary-rgb),0.25)",
+    color: "rgb(var(--primary-rgb))",
   },
 }
 

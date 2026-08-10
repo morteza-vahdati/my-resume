@@ -12,7 +12,7 @@ export default function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="w-9 h-9 rounded-xl flex items-center justify-center text-secondary border border-border bg-white/55 dark:bg-white/5 backdrop-blur hover:text-accent hover:border-accent transition-all duration-150 cursor-pointer"
+        className="w-9 h-9 rounded-xl flex items-center justify-center text-secondary border border-border bg-white/55 dark:bg-white/5 backdrop-blur hover:text-primary hover:border-primary transition-all duration-150 cursor-pointer"
         aria-label="Toggle dark/light mode"
       >
         <div className="w-4 h-4" />
@@ -29,7 +29,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="w-9 h-9 rounded-xl flex items-center justify-center text-secondary border border-border bg-white/55 dark:bg-white/5 backdrop-blur hover:text-accent hover:border-accent transition-all duration-150 cursor-pointer"
+      className="w-9 h-9 rounded-xl flex items-center justify-center text-secondary border border-border bg-white/55 dark:bg-white/5 backdrop-blur hover:text-primary hover:border-primary transition-all duration-150 cursor-pointer"
       aria-label="Toggle dark/light mode"
       title="Toggle theme"
     >

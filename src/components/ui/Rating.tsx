@@ -38,7 +38,7 @@ export default function Rating({ value, onChange, locale, disabled, error }: Rat
           <motion.span
             initial={{ opacity: 0, x: isRtl ? 6 : -6 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-xs font-medium text-accent"
+            className="text-xs font-medium text-primary"
           >
             —  {labels[locale][(hovered || value) - 1]}
           </motion.span>
@@ -61,8 +61,8 @@ export default function Rating({ value, onChange, locale, disabled, error }: Rat
                 ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}
                 ${error ? "!border-red-500/50" : "border-border/50"}
                 ${active
-                  ? "bg-accent/20 text-accent shadow-[0_0_14px_rgba(37,99,235,0.3)] border-accent/40"
-                  : "bg-muted/40 text-muted-foreground/60 hover:bg-accent/10 hover:text-accent/50"
+                  ? "bg-primary/20 text-primary shadow-[0_0_14px_rgba(var(--primary-rgb),0.3)] border-primary/40"
+                  : "bg-muted/40 text-muted-foreground/60 hover:bg-primary/10 hover:text-primary/50"
                 }`}
               aria-label={`${star} star${star > 1 ? "s" : ""}`}
             >

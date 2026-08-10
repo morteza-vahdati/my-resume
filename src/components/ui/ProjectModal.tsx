@@ -183,17 +183,17 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
                     <div className="absolute bottom-4 left-4 sm:bottom-5 sm:left-5 flex flex-wrap gap-2">
                       <span className="text-[0.65rem] font-bold px-2.5 py-1 rounded-md bg-white/20 backdrop-blur text-white border border-white/20">{project.year}</span>
                       {project.featured && (
-                        <span className="text-[0.65rem] font-bold px-2.5 py-1 rounded-md bg-accent/70 backdrop-blur text-white">
+                        <span className="text-[0.65rem] font-bold px-2.5 py-1 rounded-md bg-primary/70 backdrop-blur text-white">
                           {isRtl ? "ویژه" : "Featured"}
                         </span>
                       )}
                     </div>
                   </div>
                   {images.length > 1 && !prefersReducedMotion && (
-                    <div className="h-0.5 bg-accent/15 overflow-hidden" aria-hidden="true">
+                    <div className="h-0.5 bg-primary/15 overflow-hidden" aria-hidden="true">
                       <div
                         key={activeIdx}
-                        className="h-full bg-accent"
+                        className="h-full bg-primary"
                         style={{
                           animation: `projectProgress ${SLIDESHOW_INTERVAL}ms linear forwards`,
                           animationPlayState: paused ? "paused" : "running",
@@ -210,7 +210,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
                         key={src}
                         type="button"
                         onClick={() => setActiveImage(i)}
-                        className={`relative w-20 h-12 sm:w-24 sm:h-16 shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${i === activeIdx ? "border-accent opacity-100" : "border-transparent opacity-60 hover:opacity-100"}`}
+                        className={`relative w-20 h-12 sm:w-24 sm:h-16 shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${i === activeIdx ? "border-primary opacity-100" : "border-transparent opacity-60 hover:opacity-100"}`}
                         aria-label={`${isRtl ? "تصویر" : "Image"} ${i + 1}`}
                         aria-current={i === activeIdx ? "true" : undefined}
                       >
@@ -224,7 +224,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
 
             <div className="p-5 sm:p-7">
               <div className="flex items-center gap-2 mb-1">
-                <div className="w-2 h-2 rounded-full bg-accent" />
+                <div className="w-2 h-2 rounded-full bg-primary" />
                 <span className="text-xs font-medium text-muted-foreground">{project.role}</span>
               </div>
 
@@ -236,7 +236,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[0.65rem] font-bold px-2.5 py-1 rounded-md bg-accent/10 text-accent border border-accent/20 whitespace-nowrap"
+                    className="text-[0.65rem] font-bold px-2.5 py-1 rounded-md bg-primary/10 text-primary border border-primary/20 whitespace-nowrap"
                   >
                     {tag}
                   </span>
@@ -255,7 +255,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
                   <ul className="space-y-2">
                     {project.details.map((detail, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-sm text-secondary">
-                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                         {detail}
                       </li>
                     ))}
@@ -270,7 +270,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-white font-semibold text-sm shadow-[0_4px_14px_rgba(37,99,235,0.3)] hover:bg-[#1D4ED8] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(37,99,235,0.4)] transition-all duration-300"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white font-semibold text-sm shadow-[0_4px_14px_rgba(var(--primary-rgb),0.3)] hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(var(--primary-rgb),0.4)] transition-all duration-300"
                     >
                       <i className="fa-solid fa-arrow-up-right-from-square" />
                       {isRtl ? "نمایش زنده" : "Live Demo"}
@@ -281,7 +281,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
                       href={project.links.code}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-transparent text-foreground border-2 border-border font-semibold text-sm hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all duration-300"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-transparent text-foreground border-2 border-border font-semibold text-sm hover:border-primary hover:text-primary hover:-translate-y-0.5 transition-all duration-300"
                     >
                       <i className="fa-brands fa-github" />
                       {isRtl ? "مشاهده کد" : "View Code"}

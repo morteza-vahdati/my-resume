@@ -6,7 +6,7 @@ import type { Locale } from "@/i18config"
 import { getPersonal } from "@/lib/resume"
 import Typewriter from "@/components/ui/Typewriter"
 import LinkButton from "@/components/ui/LinkButton"
-import Link from "next/link"
+import { smoothScrollToElement } from "@/lib/scroll"
 
 interface HeroProps {
   locale: Locale
@@ -65,7 +65,7 @@ export default function Hero({ locale }: HeroProps) {
 
   const scrollDown = () => {
     const about = document.getElementById("about")
-    if (about) about.scrollIntoView({ behavior: "smooth" })
+    if (about) smoothScrollToElement(about)
   }
 
   const isRtl = locale === "fa"
@@ -103,7 +103,7 @@ export default function Hero({ locale }: HeroProps) {
             />
           ))}
           <motion.div
-            className="relative w-48 h-60 sm:w-64 sm:h-[22rem] border-4 border-white/60 dark:border-white/10 shadow-2xl overflow-hidden bg-accent/10"
+            className="relative w-48 h-60 sm:w-64 sm:h-[22rem] border-4 border-white/60 dark:border-white/10 shadow-2xl overflow-hidden bg-primary/10"
             style={{ borderRadius: "40% 60% 50% 50% / 50% 40% 60% 50%" }}
             whileHover={{ scale: 1.05, rotate: 2 }}
             transition={{ duration: 0.3 }}
@@ -118,9 +118,9 @@ export default function Hero({ locale }: HeroProps) {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/80 backdrop-blur border border-border text-xs font-semibold text-accent mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/80 backdrop-blur border border-border text-xs font-semibold text-primary mb-6"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             {t.badge}
           </motion.div>
 
@@ -132,7 +132,7 @@ export default function Hero({ locale }: HeroProps) {
           >
             {personal.name.split(" ").map((part: string, i: number, arr: string[]) =>
               i === arr.length - 1 ? (
-                <span key={i} className="text-accent"> {part}</span>
+                <span key={i} className="text-primary"> {part}</span>
               ) : (
                 <span key={i}>{i > 0 ? " " : ""}{part}</span>
               )
@@ -178,8 +178,8 @@ export default function Hero({ locale }: HeroProps) {
         className="static mt-4 md:absolute bottom-8 left-1/2 right-1/2 flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none"
         aria-label="Scroll to about section"
       >
-        <div className="w-6 h-[38px] rounded-full border-2 border-border flex justify-center pt-1.5 hover:border-accent hover:shadow-[0_0_12px_rgba(37,99,235,0.3)] transition-all duration-300">
-          <div className="w-1 h-2 rounded-full bg-accent animate-[scrollBounce_1.8s_ease-in-out_infinite]" />
+        <div className="w-6 h-[38px] rounded-full border-2 border-border flex justify-center pt-1.5 hover:border-primary hover:shadow-[0_0_12px_rgba(var(--primary-rgb),0.3)] transition-all duration-300">
+          <div className="w-1 h-2 rounded-full bg-primary animate-[scrollBounce_1.8s_ease-in-out_infinite]" />
         </div>
         <span className="text-[0.65rem] text-muted-foreground font-medium tracking-[1.5px] uppercase">
           {t.scroll}

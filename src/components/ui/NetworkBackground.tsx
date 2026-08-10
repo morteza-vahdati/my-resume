@@ -54,8 +54,10 @@ export default function NetworkBackground() {
       const h = window.innerHeight
       ctx.clearRect(0, 0, w, h)
 
-      const isDark = document.documentElement.classList.contains("dark")
-      const accent = isDark ? "59, 130, 246" : "37, 99, 235"
+      // Read from the token so light/dark and any brand change follow the theme.
+      const primary = getComputedStyle(document.documentElement)
+        .getPropertyValue("--primary-rgb")
+        .trim()
       const accent2 = "99, 102, 241"
       const maxDist = isMobile() ? 150 : 220
 
@@ -77,7 +79,7 @@ export default function NetworkBackground() {
             const gradient = ctx.createLinearGradient(
               nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y
             )
-            gradient.addColorStop(0, `rgba(${accent}, ${alpha})`)
+            gradient.addColorStop(0, `rgba(${primary}, ${alpha})`)
             gradient.addColorStop(1, `rgba(${accent2}, ${alpha * 0.6})`)
             ctx.beginPath()
             ctx.moveTo(nodes[i].x, nodes[i].y)
@@ -95,12 +97,12 @@ export default function NetworkBackground() {
 
         ctx.beginPath()
         ctx.arc(node.x, node.y, r + 3, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${accent}, 0.12)`
+        ctx.fillStyle = `rgba(${primary}, 0.12)`
         ctx.fill()
 
         ctx.beginPath()
         ctx.arc(node.x, node.y, r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${accent}, 0.55)`
+        ctx.fillStyle = `rgba(${primary}, 0.55)`
         ctx.fill()
 
         ctx.beginPath()

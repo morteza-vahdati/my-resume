@@ -8,14 +8,21 @@
     --foreground: 240 10% 4%;
     --card: 0 0% 100% / 0.65;
     --card-foreground: 240 10% 4%;
+    /* The brand colour. Change it here and the whole site follows, including
+       the glows below, which is why they are driven by --primary-rgb rather
+       than repeating literal rgba() values in component classes. */
     --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
+    --primary-hover: 224 76% 48%;
+    --primary-rgb: 37, 99, 235;
+
     --secondary: 240 4% 51%;
     --secondary-foreground: 240 6% 10%;
     --muted: 220 14% 93%;
     --muted-foreground: 240 4% 46%;
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent is the quiet surface tint of the shadcn scale, not the brand. */
+    --accent: 220 14% 93%;
+    --accent-foreground: 240 6% 10%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 6% 90%;
@@ -36,12 +43,16 @@
     --card-foreground: 0 0% 98%;
     --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
+    --primary-hover: 213 94% 68%;
+    /* Lighter on dark so glows read against the near-black background. */
+    --primary-rgb: 59, 130, 246;
+
     --secondary: 240 4% 65%;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 4% 16%;
     --muted-foreground: 240 5% 65%;
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 240 4% 16%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 4% 16%;
@@ -64,6 +75,10 @@
     scroll-behavior: smooth;
     overflow-x: hidden;
     scrollbar-gutter: stable;
+    /* The navbar is a fixed 64px at every breakpoint; the rest is breathing room.
+       Mobile viewports are short, so the gap is tighter there — a section landing
+       80px down wastes a tenth of the screen. src/lib/scroll.ts reads this value,
+       so keep it in sync with the navbar height. */
     scroll-padding-top: 56px;
   }
 
@@ -96,6 +111,25 @@
   ::-webkit-scrollbar-thumb {
     background: hsl(var(--border));
     border-radius: 3px;
+  }
+}
+
+@layer base {
+
+  /* The React intro only mounts after hydration, which is long enough to show
+     a frame of the real page first. The inline script in the root layout adds
+     `intro-pending` before first paint so this cover is already there, and
+     LoadingScreen drops the class once its own overlay is in the DOM. */
+  #intro-boot {
+    display: none;
+  }
+
+  html.intro-pending #intro-boot {
+    display: flex;
+  }
+
+  html.intro-pending body {
+    overflow: hidden;
   }
 }
 

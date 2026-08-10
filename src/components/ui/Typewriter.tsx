@@ -49,7 +49,7 @@ export default function Typewriter({ words }: TypewriterProps) {
   }, [tick])
 
   return (
-    <span className="ltr:border-r-2 rtl:border-l-2 border-accent ltr:pr-0.5 rtl:pl-0.5">
+    <span className="ltr:border-r-2 rtl:border-l-2 border-primary ltr:pr-0.5 rtl:pl-0.5">
       {words[wordIndex]?.slice(0, charIndex) || ""}
     </span>
   )
