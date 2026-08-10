@@ -37,12 +37,13 @@ export function middleware(request: NextRequest) {
       i18n.locales.includes(cookieLocale as (typeof i18n)["locales"][number])
         ? cookieLocale
         : getLocale(request)) || i18n.defaultLocale;
-    const response = NextResponse.redirect(
-      new URL(
-        `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
-        request.url,
-      ),
-    );
+
+    // Clone so query strings survive, and avoid `/en/` for the bare root —
+    // that would only bounce again through Next's trailing-slash redirect.
+    const url = request.nextUrl.clone();
+    url.pathname = pathname === "/" ? `/${locale}` : `/${locale}${pathname}`;
+
+    const response = NextResponse.redirect(url);
     response.cookies.set("locale", locale, { path: "/" });
     return response;
   }

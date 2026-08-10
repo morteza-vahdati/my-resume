@@ -1,28 +1,40 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 import type { Locale } from "@/i18config"
 
-export default function NotFoundContent({ initialLocale }: { initialLocale: Locale }) {
+export default function NotFoundContent({ locale: initialLocale }: { locale: Locale }) {
   const [locale, setLocale] = useState<Locale>(initialLocale)
   const isRtl = locale === "fa"
 
-  useEffect(() => {
-    document.documentElement.lang = locale
-    document.documentElement.dir = isRtl ? "rtl" : "ltr"
-  }, [locale, isRtl])
+  /**
+   * This page lives outside the `[locale]` route tree, so there is nothing for
+   * the router to navigate to — asking it to would reload the document, and a
+   * full reload on a React app throws away the theme transition and the scroll
+   * position for no gain. The whole page is client-rendered from `locale`, so
+   * swapping that state and rewriting the URL is the entire language switch.
+   */
+  const switchLocale = (next: Locale, path: string) => {
+    setLocale(next)
+    document.documentElement.lang = next
+    document.documentElement.dir = next === "fa" ? "rtl" : "ltr"
+    // No navigation means the middleware never runs, so persist the choice
+    // here — same name, path and lifetime it would have set.
+    document.cookie = `locale=${next}; path=/`
+    window.history.replaceState(null, "", path)
+  }
 
   return (
     <div className="relative z-10 min-h-screen flex flex-col overflow-x-hidden">
-      <Navbar locale={locale} onLocaleChange={setLocale} />
+      <Navbar locale={locale} onLocaleSwitch={switchLocale} />
 
       <main className="flex-1 flex items-center justify-center px-4 sm:px-8 pt-[96px] pb-16">
         <div className="text-center max-w-xl w-full animate-[fadeUp_0.6s_ease_both]">
           <div
-            className="text-[clamp(4.5rem,14vw,9.5rem)] font-black tracking-[-4px] leading-none font-display select-none bg-gradient-to-b from-accent/70 to-accent/15 bg-clip-text text-transparent"
+            className="text-[clamp(4.5rem,14vw,9.5rem)] font-black tracking-[-4px] leading-none font-display select-none bg-gradient-to-b from-primary/70 to-primary/15 bg-clip-text text-transparent"
             aria-hidden
           >
             404
@@ -36,7 +48,7 @@ export default function NotFoundContent({ initialLocale }: { initialLocale: Loca
               boxShadow: "var(--shadow-glass)",
             }}
           >
-            <div className="w-14 h-14 rounded-xl bg-accent/15 flex items-center justify-center text-accent mx-auto mb-6 animate-[spinSlow_10s_linear_infinite]">
+            <div className="w-14 h-14 rounded-xl bg-primary/15 flex items-center justify-center text-primary mx-auto mb-6 animate-[spinSlow_10s_linear_infinite]">
               <i className="fa-solid fa-compass text-xl" />
             </div>
 
@@ -53,14 +65,14 @@ export default function NotFoundContent({ initialLocale }: { initialLocale: Loca
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
                 href={`/${locale}`}
-                className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-accent text-white text-sm font-semibold hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(37,99,235,0.35)] transition-all duration-300 w-full sm:w-auto justify-center"
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(var(--primary-rgb),0.35)] transition-all duration-300 w-full sm:w-auto justify-center"
               >
                 <i className="fa-solid fa-house text-xs" />
                 {isRtl ? "بازگشت به خانه" : "Back to Home"}
               </Link>
               <Link
                 href={`/${locale}#contact`}
-                className="inline-flex items-center gap-2 px-7 py-3 rounded-xl border border-border text-secondary font-semibold text-sm hover:border-accent hover:text-accent hover:bg-accent/5 hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto justify-center"
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-xl border border-border text-secondary font-semibold text-sm hover:border-primary hover:text-primary hover:bg-primary/5 hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto justify-center"
               >
                 <i className="fa-solid fa-envelope text-xs" />
                 {isRtl ? "تماس با من" : "Contact me"}

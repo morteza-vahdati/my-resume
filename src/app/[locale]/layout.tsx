@@ -1,37 +1,36 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
-import { SpeedInsights } from '@vercel/speed-insights/next'
-import { Locale } from '@/i18config'
+import { i18n, Locale } from '@/i18config'
 import { getSeo } from '@/lib/resume'
-
-const LoadingScreen = dynamic(() => import('@/components/ui/LoadingScreen'), { ssr: false })
+import { siteConfig } from '@/lib/site-config'
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   const seo = getSeo(params.locale)
+  const baseUrl = siteConfig.url
+
+  const languages = Object.fromEntries(
+    i18n.locales.map((l) => [l, `${baseUrl}/${l}`]),
+  )
+
   return {
+    metadataBase: new URL(baseUrl),
     title: seo.title,
     description: seo.description,
     keywords: seo.keywords,
+    alternates: {
+      canonical: `${baseUrl}/${params.locale}`,
+      languages: { ...languages, "x-default": `${baseUrl}/${i18n.defaultLocale}` },
+    },
     openGraph: {
       title: seo.title,
       description: seo.description,
       type: "website",
+      url: `${baseUrl}/${params.locale}`,
       locale: params.locale === "fa" ? "fa_IR" : "en_US",
       siteName: seo.title,
     },
   }
 }
 
-export default function LocaleLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <>
-      <LoadingScreen />
-      {children}
-      <SpeedInsights />
-    </>
-  )
+export default function LocaleLayout({ children }: { children: React.ReactNode }) {
+  return (<>{children}</>)
 }

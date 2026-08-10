@@ -1,28 +1,101 @@
 "use client"
 
-import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import type { Locale } from "@/i18config"
 
-export default function LoadingScreen() {
-  const [show, setShow] = useState(true)
-  const params = useParams()
-  const locale = params?.locale as string | undefined
-  const text = locale === "fa" ? "منتظر باش، دارم خودم رو معرفی می‌کنم" : "Wait, I'm introducing myself"
+const MIN_VISIBLE = 4000
+const FADE_OUT = 1200
+
+export interface IntroPlayDetail {
+  locale?: Locale
+}
+
+interface LoadingScreenProps {
+  locale: Locale
+}
+
+export default function LoadingScreen({ locale }: LoadingScreenProps) {
+  const [show, setShow] = useState(false)
+  const [textLocale, setTextLocale] = useState<Locale>(locale)
+
+  const text =
+    textLocale === "fa"
+      ? "منتظر باش، دارم خودم رو معرفی می‌کنم"
+      : "Wait, I'm introducing myself"
 
   useEffect(() => {
-    const timer = setTimeout(() => setShow(false), 1500)
-    return () => clearTimeout(timer)
+    let hideTimer: ReturnType<typeof setTimeout> | undefined
+    let doneTimer: ReturnType<typeof setTimeout> | undefined
+
+    const play = (e?: Event) => {
+      const next = (e as CustomEvent<IntroPlayDetail>)?.detail?.locale
+      if (next) setTextLocale(next)
+      setShow(true)
+      clearTimeout(hideTimer)
+      clearTimeout(doneTimer)
+      hideTimer = setTimeout(() => setShow(false), MIN_VISIBLE)
+      doneTimer = setTimeout(
+        () => window.dispatchEvent(new Event("intro:done")),
+        MIN_VISIBLE + FADE_OUT,
+      )
+    }
+
+    let shouldPlay = false
+    try {
+      shouldPlay = sessionStorage.getItem("intro-shown") !== "1"
+      if (shouldPlay) sessionStorage.setItem("intro-shown", "1")
+    } catch {
+      // Private modes can throw on sessionStorage; just skip the intro.
+    }
+
+    if (shouldPlay) {
+      play()
+    } else {
+      // The inline script may have covered the page on a guess this effect can
+      // now correct. Leaving the cover up would strand the reader.
+      document.documentElement.classList.remove("intro-pending")
+    }
+
+    window.addEventListener("intro:play", play)
+    return () => {
+      clearTimeout(hideTimer)
+      clearTimeout(doneTimer)
+      window.removeEventListener("intro:play", play)
+      document.documentElement.classList.remove("intro-pending")
+    }
   }, [])
+
+  // Without this the reader can scroll the page behind the overlay and land
+  // somewhere random once it lifts.
+  useEffect(() => {
+    if (!show) return
+    const html = document.documentElement
+    const body = document.body
+    const prevHtml = html.style.overflow
+    const prevBody = body.style.overflow
+    html.style.overflow = "hidden"
+    body.style.overflow = "hidden"
+    // This runs after the animated overlay is in the DOM, so handing off from
+    // the boot cover here cannot expose the page for a frame.
+    html.classList.remove("intro-pending")
+    return () => {
+      html.style.overflow = prevHtml
+      body.style.overflow = prevBody
+    }
+  }, [show])
 
   return (
     <AnimatePresence>
       {show && (
         <motion.div
+          id="intro-screen"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.35, ease: "easeInOut" }}
+          transition={{ duration: FADE_OUT / 1000, ease: "easeInOut" }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
+          role="status"
+          aria-live="polite"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -33,7 +106,7 @@ export default function LoadingScreen() {
           >
             <div className="relative">
               <motion.div
-                className="size-10 rounded-[10px] bg-accent/80 shadow-md"
+                className="size-10 rounded-[10px] bg-primary/80 shadow-md"
                 animate={{ rotate: 360, borderRadius: ["20px", "50%", "10px"] }}
                 transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
               />
@@ -51,7 +124,7 @@ export default function LoadingScreen() {
                 {[0, 1, 2].map((i) => (
                   <motion.div
                     key={i}
-                    className="size-1 rounded-full bg-accent/75"
+                    className="size-1 rounded-full bg-primary/75"
                     animate={{ opacity: [0.2, 1, 0.3] }}
                     transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3 }}
                   />
