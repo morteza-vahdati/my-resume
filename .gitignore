@@ -8,6 +8,11 @@
 
 # testing
 /coverage
+# Cypress writes a PNG here for every failed test; the README images live in
+# /screenshots and are committed.
+/cypress/screenshots
+/cypress/videos
+/cypress/downloads
 
 # next.js
 /.next/
