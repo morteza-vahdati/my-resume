@@ -1,5 +1,5 @@
 /** Matches the scroll-padding-top pair in globals.css. */
-const OFFSET = { mobile: 56, desktop: 64 };
+const OFFSET = { mobile: 48, desktop: 64 };
 
 /** The nav lands a section under the fixed bar, not flush with the viewport top. */
 function assertLandedUnderNavbar(id: string, offset: number) {

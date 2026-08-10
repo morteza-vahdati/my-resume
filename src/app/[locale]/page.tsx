@@ -23,7 +23,7 @@ export default function Page({ params: { locale } }: { params: { locale: Locale 
 
       <div className="relative z-10 overflow-x-hidden">
         <Navbar locale={locale} />
-        <main className="pt-8 sm:pt-12">
+        <main className="pt-12 sm:pt-16">
           <Hero locale={locale} />
           <About locale={locale} />
           <Skills locale={locale} />

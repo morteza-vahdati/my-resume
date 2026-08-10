@@ -79,12 +79,18 @@
        Mobile viewports are short, so the gap is tighter there — a section landing
        80px down wastes a tenth of the screen. src/lib/scroll.ts reads this value,
        so keep it in sync with the navbar height. */
-    scroll-padding-top: 56px;
+    scroll-padding-top: 48px;
   }
 
   @media (min-width: 768px) {
     html {
       scroll-padding-top: 64px;
+    }
+  }
+
+  @-moz-document url-prefix() {
+    * {
+      scrollbar-width: thin;
     }
   }
 
