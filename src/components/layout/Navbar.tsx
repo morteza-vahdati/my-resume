@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import Image from "next/image"
+import { useEffect, useRef, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { usePathname, useRouter } from "next/navigation"
 import ThemeToggle from "@/components/ui/ThemeToggle"
@@ -11,7 +12,6 @@ import type { Locale } from "@/i18config"
 
 interface NavbarProps {
   locale: Locale
-  /** Forwarded to LanguageToggle; only the 404 needs it. See LanguageToggle. */
   onLocaleSwitch?: (next: Locale, path: string) => void
 }
 
@@ -25,35 +25,84 @@ const navItems = (locale: Locale) => [
 
 export default function Navbar({ locale, onLocaleSwitch }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeKey, setActiveKey] = useState<string | null>(null);
   const router = useRouter()
   const pathname = usePathname()
-  const personal = getPersonal(locale)
-  const initials = personal.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2)
 
-  // Home page is the only real route; on a 404/section path navigate there first.
+  const prevHashRef = useRef<string>("");
+
+  const personal = getPersonal(locale)
+
   const homePath = `/${locale}`
   const isHome = pathname === homePath || pathname === "/"
 
-  const goHome = () => {
-    setMenuOpen(false)
-    if (isHome) {
-      history.replaceState(null, "", homePath)
-      smoothScrollToTop()
-    } else {
-      router.push(homePath)
+  const syncFromHash = useCallback(
+    (hash?: string) => {
+      const currentHash = hash ?? window.location.hash.replace("#", "");
+      const isValid = currentHash && navItems(locale).some((item) => item.key === currentHash);
+
+      if (isValid) {
+        setActiveKey(currentHash);
+        if (isHome) {
+          const el = document.getElementById(currentHash);
+          if (el) smoothScrollToElement(el);
+        }
+      } else {
+        setActiveKey(null);
+      }
+      prevHashRef.current = currentHash;
+    },
+    [locale, isHome]
+  );
+
+
+  useEffect(() => {
+    syncFromHash();
+
+    const handleHashChange = () => syncFromHash();
+    const handlePopState = () => syncFromHash();
+
+    window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [syncFromHash]);
+
+
+  useEffect(() => {
+    const currentHash = window.location.hash.replace("#", "");
+    if (currentHash !== prevHashRef.current) {
+      syncFromHash(currentHash);
     }
-  }
+  });
+
+  const goHome = () => {
+    setMenuOpen(false);
+    if (isHome) {
+      history.replaceState(null, "", homePath);
+      smoothScrollToTop();
+      syncFromHash("");
+    } else {
+      router.push(homePath);
+    }
+  };
 
   const scrollTo = (id: string) => {
-    setMenuOpen(false)
+    setMenuOpen(false);
+    setActiveKey(id);
+
     if (isHome) {
-      const el = document.getElementById(id)
-      if (el) smoothScrollToElement(el)
-      history.replaceState(null, "", `${homePath}#${id}`)
+      const el = document.getElementById(id);
+      if (el) smoothScrollToElement(el);
+      history.replaceState(null, "", `${homePath}#${id}`);
+      prevHashRef.current = id;
     } else {
-      router.push(`${homePath}#${id}`, { scroll: false })
+      router.push(`${homePath}#${id}`, { scroll: false });
     }
-  }
+  };
 
   return (
     <>
@@ -62,8 +111,8 @@ export default function Navbar({ locale, onLocaleSwitch }: NavbarProps) {
           onClick={goHome}
           className="flex items-center gap-2.5 text-base sm:text-lg font-extrabold tracking-tight text-foreground cursor-pointer"
         >
-          <span className="w-8 h-8 rounded-xl bg-primary flex items-center justify-center text-white text-xs font-bold shadow-[0_2px_8px_rgba(var(--primary-rgb),0.3)]">
-            {initials}
+          <span className="size-8 rounded-xl flex items-center justify-center shadow-[0_2px_8px_rgba(var(--primary-rgb),0.2)]">
+            <Image alt="logo" width={32} height={32} src="/logo.png" />
           </span>
           <span>{personal.name}</span>
         </button>
@@ -73,7 +122,14 @@ export default function Navbar({ locale, onLocaleSwitch }: NavbarProps) {
             <li key={item.key}>
               <button
                 onClick={() => scrollTo(item.key)}
-                className="text-sm md:text-xs lg:text-sm font-semibold px-2 md:px-2 lg:px-4 py-2 rounded-full text-secondary hover:text-primary hover:bg-muted transition-all duration-200 cursor-pointer whitespace-nowrap"
+                className={`
+                  text-sm md:text-xs lg:text-sm font-semibold px-2 md:px-2 lg:px-4 py-2 rounded-full 
+                  transition-all duration-200 cursor-pointer whitespace-nowrap
+                  ${activeKey === item.key
+                    ? "text-primary bg-primary/10 shadow-sm"
+                    : "text-secondary hover:text-primary hover:bg-muted"
+                  }
+                `}
               >
                 {item.label}
               </button>
@@ -104,7 +160,7 @@ export default function Navbar({ locale, onLocaleSwitch }: NavbarProps) {
             />
           </button>
         </div>
-      </nav>
+      </nav >
 
       <AnimatePresence>
         {menuOpen && (
@@ -120,7 +176,15 @@ export default function Navbar({ locale, onLocaleSwitch }: NavbarProps) {
               <button
                 key={item.key}
                 onClick={() => scrollTo(item.key)}
-                className={`py-3.5 text-secondary font-semibold ${locale === "fa" ? "text-right" : "text-left"} border-b border-border last:border-none hover:text-primary transition-colors duration-150 cursor-pointer`}
+                className={`
+                  py-3.5 font-semibold border-b border-border last:border-none 
+                  transition-colors duration-150 cursor-pointer
+                  ${locale === "fa" ? "text-right" : "text-left"}
+                  ${activeKey === item.key
+                    ? "text-primary"
+                    : "text-secondary hover:text-primary"
+                  }
+                `}
               >
                 {item.label}
               </button>
