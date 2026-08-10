@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "screenshots": "cypress run --spec cypress/capture/screenshots.cy.ts --config specPattern=cypress/capture/**/*.cy.ts,screenshotsFolder=screenshots,trashAssetsBeforeRuns=false"
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.4.0",
