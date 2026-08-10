@@ -5,14 +5,12 @@ import LocaleHtmlSync from "@/components/ui/LocaleHtmlSync"
 import { iransansfanum } from "@/lib/iransans-font"
 import "./globals.css"
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const rawLocale =
-    headers().get("x-locale") || cookies().get("locale")?.value || ""
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+
+  const rawLocale = headers().get("x-locale") || cookies().get("locale")?.value || ""
+
   const locale = rawLocale === "fa" ? "fa" : "en"
+
   const dir = locale === "fa" ? "rtl" : "ltr"
 
   return (

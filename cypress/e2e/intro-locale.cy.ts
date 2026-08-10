@@ -1,5 +1,5 @@
 /** LoadingScreen keeps the overlay up for MIN_VISIBLE + FADE_OUT. */
-const INTRO_MS = 4000 + 1200;
+const INTRO_MS = 2000 + 500;
 
 const LANG_TOGGLE = '[aria-label="Change language"]';
 const THEME_TOGGLE = '[aria-label="Toggle dark/light mode"]';
@@ -57,7 +57,8 @@ describe("Language toggle", () => {
       // `scrollbar-gutter: stable` reserves a strip that sits on the left under
       // RTL, so after an en -> fa switch the cover starts a scrollbar-width in.
       // Allow for that rather than demanding a flush 0.
-      const gutter = el.ownerDocument.defaultView!.innerWidth - root.clientWidth;
+      const gutter =
+        el.ownerDocument.defaultView!.innerWidth - root.clientWidth;
       expect(rect.top, "covers from the top").to.eq(0);
       expect(rect.left, "covers from the left").to.be.at.most(gutter + 1);
       expect(rect.width, "covers the full width").to.be.gte(root.clientWidth);
@@ -117,7 +118,8 @@ describe("Language toggle", () => {
     cy.getCookie("locale").should("have.property", "value", "fa");
 
     cy.window().should((win) => {
-      const stamp = (win as unknown as { __sameDocument?: boolean }).__sameDocument;
+      const stamp = (win as unknown as { __sameDocument?: boolean })
+        .__sameDocument;
       expect(stamp, "switched without reloading the document").to.eq(true);
     });
   });

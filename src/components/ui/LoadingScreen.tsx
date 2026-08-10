@@ -4,8 +4,8 @@ import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import type { Locale } from "@/i18config"
 
-const MIN_VISIBLE = 4000
-const FADE_OUT = 1200
+const MIN_VISIBLE = 2000
+const FADE_OUT = 500
 
 export interface IntroPlayDetail {
   locale?: Locale

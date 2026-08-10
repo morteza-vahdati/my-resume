@@ -54,7 +54,6 @@ export default function NetworkBackground() {
       const h = window.innerHeight
       ctx.clearRect(0, 0, w, h)
 
-      // Read from the token so light/dark and any brand change follow the theme.
       const primary = getComputedStyle(document.documentElement)
         .getPropertyValue("--primary-rgb")
         .trim()
