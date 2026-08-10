@@ -8,11 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "screenshots": "cypress run --spec cypress/capture/screenshots.cy.ts --config specPattern=cypress/capture/**/*.cy.ts,screenshotsFolder=screenshots,trashAssetsBeforeRuns=false"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.4.0",
-    "@vercel/speed-insights": "^2.0.0",
     "framer-motion": "^12.42.2",
     "negotiator": "^0.6.3",
     "next": "14.2.4",
