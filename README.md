@@ -1,10 +1,10 @@
 <div align="center">
 
-# Morteza Vahdati — Resume
+# Morteza Vahdati — Portfolio
 
-A bilingual (English / Persian) single-page resume site, built with the Next.js App Router.
+**A bilingual portfolio built to show how I work, not just what I use.**
 
-**[English](README.md) · [فارسی](README.fa.md)**
+[Live portfolio](http://morteza-vahdati.vercel.app) · [GitHub](https://github.com/morteza-vahdati) · **[English](README.md) · [فارسی](README.fa.md)**
 
 </div>
 
@@ -12,112 +12,77 @@ A bilingual (English / Persian) single-page resume site, built with the Next.js 
 
 <div align="center">
 
-|                        Light                        |                         Dark                          |
-| :-------------------------------------------------: | :---------------------------------------------------: |
-| ![light mode](public/images/screenshot/en/hero.png) | ![dark mode](public/images/screenshot/en/contact.png) |
+| Light | Dark |
+| :---: | :--: |
+| ![Light portfolio view](public/images/screenshot/en/hero.png) | ![Dark portfolio view](public/images/screenshot/en/contact.png) |
 
 </div>
 
----
+## The short version
 
-## About
+This repository is the source of my personal, bilingual portfolio. It turns resume data into a responsive web experience where English and Persian are independent first-class locales. The project is also a practical demonstration of the way I work: clear interfaces, RTL-aware layout, focused motion, data-driven content, and careful edge cases.
 
-A personal resume site that treats Persian as a first-class language rather than a translation layer. The layout mirrors to RTL, the type switches to a local IRANSans face, and project dates convert from Gregorian to Shamsi — all from a single JSON file.
+## Selected work
+
+Each project below is described by context, contribution, current state, and evidence. Team projects are written around contribution rather than ownership; unverified metrics are intentionally omitted.
+
+### Academist — custom management system
+
+I contribute as a full-stack developer to a team-built system for user registration, resume pages, articles, educational content, and communication features. The stack includes Next.js, NestJS, TypeScript, Prisma, PostgreSQL, Tailwind CSS, and ESLint. Authentication, role-based access, structured data, and responsive UI are implemented; publication is still in progress.
+
+### Madeliran — health-focused social platform
+
+I participated in Madeliran from its initial version onward, contributing remotely to React and TypeScript web features. Cross-team coordination used Trello and online meetings, with shared planning and project progress as part of the workflow. [Visit Madeliran](https://madeliran.ir/).
+
+### Portfolio — this project
+
+This is a personal Next.js portfolio with English and Persian RTL layouts, locale-aware routing, light/dark themes, SEO metadata, responsive UI, and a protected contact form. Its content is maintained in [`data/resume.json`](data/resume.json), so the UI and metadata grow from one bilingual source.
 
 ## Features
 
-- **Bilingual (en / fa)** — locale-prefixed routes, `Accept-Language` negotiation, and a cookie that remembers the choice
-- **True RTL** — direction, layout mirroring, and a font swap, not just `dir="rtl"`
-- **Light / dark theme** — follows the OS by default, persists once chosen
-- **Content as data** — every résumé field lives in one JSON file; components never hardcode content
-- **Contact form** — layered anti-spam guards (origin, honeypot, timing, per-IP rate limit) with bilingual errors
-- **SEO** — canonical and hreflang tags, sitemap, robots, web manifest, and Person JSON-LD, all derived from the same data
-- **Tested end to end** — 65 Cypress specs covering navigation, both locales, the form, the API guards, and the SEO output
+- **Bilingual by design** — English and Persian have independent, natural copy with locale-aware routing and real RTL layout support.
+- **Responsive and mobile-aware** — responsive sections, stable project imagery, mobile-friendly modals, an outside-click mobile menu, and lighter motion on compact viewports.
+- **Theme-ready UI** — light/dark theme persistence, synchronized browser theme color, accessible controls, and reduced-motion considerations.
+- **Data-driven content** — resume, skills, experience, project details, and SEO copy are maintained as localized `{ en, fa }` data in one source.
+- **Protected contact flow** — origin checks, honeypot detection, timing validation, per-IP rate limiting, bilingual validation, and optional SMTP delivery.
+- **Search-friendly output** — localized metadata, canonical and hreflang links, sitemap, robots, manifest, and Person JSON-LD.
+- **Proof through tests** — Cypress coverage for navigation, locale switching, contact flows, API guards, SEO, modal behavior, and mobile interactions (66 checks).
 
-## Tech stack
-
-| Area       | Choice                                        |
-| ---------- | --------------------------------------------- |
-| Framework  | Next.js 14 (App Router), React 18             |
-| Language   | TypeScript (strict)                           |
-| Styling    | Tailwind CSS, CSS variables, `next-themes`    |
-| Animation  | Framer Motion                                 |
-| i18n       | Negotiator + `@formatjs/intl-localematcher`   |
-| Mail       | Nodemailer (SMTP, optional)                   |
-| Testing    | Cypress (E2E)                                 |
-
-## Getting started
+## Run locally
 
 ```bash
 npm install
-cp .env.example .env    # optional: SMTP settings for the contact form
-npm run dev             # http://localhost:3000
+cp .env.example .env
+npm run dev
 ```
 
-The app redirects `/` to `/en` or `/fa` based on your cookie, then your browser's language.
-
-## Scripts
+Open `http://localhost:3000`. The root route chooses `/en` or `/fa` from the saved locale and browser language.
 
 ```bash
-npm run dev            # dev server on :3000
-npm run build          # production build (also typechecks)
 npm run lint           # ESLint
-npm run cypress:open   # interactive E2E
-npm run cypress:run    # headless E2E — needs a running server
-npm run screenshots    # regenerate the README images
+npm run build          # production build and type check
+npm run cypress:run   # headless E2E; requires a running server
+npm run cypress:open  # interactive E2E runner
+```
+
+## Project map
+
+```text
+src/app/          App Router, locale layouts, API, metadata, crawler routes
+src/components/   Layout, sections, UI primitives, JSON-LD
+data/resume.json  Single source for localized resume and project content
+public/           Images, fonts, screenshots, PDFs, and logo
+cypress/          End-to-end specifications and support setup
 ```
 
 ## Environment
 
-All variables are optional. Without SMTP the contact form still accepts submissions and reports `emailSent: false` rather than showing the visitor an error they can't act on.
+All variables are optional. Copy `.env.example` to `.env` to configure SMTP and the public site origin. Set `SITE_URL` to the real production domain so canonical URLs, sitemap, robots, and Cypress use the right host.
 
-| Variable                              | Purpose                                                    |
-| ------------------------------------- | ---------------------------------------------------------- |
-| `SITE_URL`                            | Canonical/hreflang base, sitemap and robots domain, accepted form origin, and the Cypress base URL |
-| `SMTP_HOST` `SMTP_PORT` `SMTP_USER` `SMTP_PASS` | Mail transport                                   |
-| `FROM_EMAIL` `CONTACT_TO`             | Sender and recipient for contact messages                   |
+## Content workflow
 
-> `SITE_URL` should be the real public domain in production — a local value there ships `localhost` URLs to search engines.
-
-## Editing the content
-
-Everything visible on the page comes from [data/resume.json](data/resume.json), as `{ en, fa }` pairs:
-
-```jsonc
-{
-  "personal": {
-    "name": { "en": "Morteza Vahdati", "fa": "مرتضی وحدتی" },
-    "role": { "en": "Web Developer", "fa": "برنامه‌نویس وب" }
-  }
-}
-```
-
-TypeScript types are derived from the JSON itself, so adding a field updates the types — there is no separate schema to keep in sync.
-
-## Testing
-
-Cypress runs against a live server, so start one first:
-
-```bash
-npm run build && npm run start   # or npm run dev
-npm run cypress:run
-```
-
-| Spec                | Covers                                          |
-| ------------------- | ----------------------------------------------- |
-| `home.cy.ts`        | section rendering, `lang`/`dir`, 404 chrome      |
-| `navigation.cy.ts`  | scrolling, scroll offset, mobile menu           |
-| `intro-locale.cy.ts`| intro overlay, language toggle, theme toggle    |
-| `contact.cy.ts`     | form validation and submit, both locales        |
-| `api.cy.ts`         | contact API guards                              |
-| `seo.cy.ts`         | sitemap, robots, manifest, JSON-LD, headers     |
-
-Contact submissions are stubbed — leaving them live would mail the site owner on every run.
-
-## Deployment
-
-Deploys to [Vercel](https://vercel.com) with no extra configuration. Set the environment variables in the project settings, `SITE_URL` above all.
+Edit visible resume content in [`data/resume.json`](data/resume.json) as `{ en, fa }` pairs. Write each locale naturally while keeping claims, dates, links, and certainty aligned. Components consume the data; they should not become a second content database.
 
 ## License
 
-Personal project. The code is free to learn from; the résumé content and photography are not.
+Personal project. The code is available for learning; resume content, photographs, and personal data are not licensed for reuse.
