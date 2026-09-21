@@ -52,6 +52,18 @@ describe("Metadata", () => {
     cy.visitLocale("fa");
     cy.title().should("not.be.empty");
   });
+
+  it("sets a theme color for the browser chrome", () => {
+    cy.visitLocale("en", "", { theme: "light" });
+    cy.get('meta[name="theme-color"]')
+      .should("have.attr", "content")
+      .and("eq", "#2563EB");
+
+    cy.get('[aria-label="Toggle dark/light mode"]').click();
+    cy.get('meta[name="theme-color"]')
+      .should("have.attr", "content")
+      .and("eq", "#0A0A0B");
+  });
 });
 
 describe("Crawler routes", () => {

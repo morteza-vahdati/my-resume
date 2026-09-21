@@ -1,9 +1,18 @@
 import { cookies, headers } from "next/headers"
+import type { Viewport } from "next"
 import ThemeProvider from "@/provider/theme-provider"
 import LoadingScreen from "@/components/ui/LoadingScreen"
 import LocaleHtmlSync from "@/components/ui/LocaleHtmlSync"
+import ThemeColorSync from "@/components/ui/ThemeColorSync"
 import { iransansfanum } from "@/lib/iransans-font"
 import "./globals.css"
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  colorScheme: "light dark",
+  themeColor: "#2563EB",
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
@@ -43,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
         <ThemeProvider>
           {/* Both live above `[locale]` so a language switch does not unmount them. */}
+          <ThemeColorSync />
           <LocaleHtmlSync />
           <LoadingScreen locale={locale} />
           {children}
