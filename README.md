@@ -18,7 +18,7 @@
 
 </div>
 
-## The short version
+## About
 
 This repository is the source of my personal, bilingual portfolio. It turns resume data into a responsive web experience where English and Persian are independent first-class locales. The project is also a practical demonstration of the way I work: clear interfaces, RTL-aware layout, focused motion, data-driven content, and careful edge cases.
 
