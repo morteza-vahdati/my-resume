@@ -88,6 +88,19 @@ All variables are optional. Copy `.env.example` to `.env` for local configuratio
 
 Keep `.env` out of version control. In production, provide these values through the hosting provider's secret configuration and set `SITE_URL` to the real public domain.
 
+## Deployment
+
+The project is ready for deployment on [Vercel](https://vercel.com) without a custom adapter. Connect the repository, keep the default Next.js build settings, and add the environment variables from the previous section in the project settings.
+
+Before publishing, run:
+
+```bash
+npm run lint
+npm run build
+```
+
+After deployment, verify both locale routes (`/en` and `/fa`), the crawler endpoints (`/sitemap.xml`, `/robots.txt`, and `/manifest.webmanifest`), the public project links, and the contact flow. For a local production check, use `npm run build && npm run start`.
+
 ## Content workflow
 
 Edit visible resume content in [`data/resume.json`](data/resume.json) as `{ en, fa }` pairs. Write each locale naturally while keeping claims, dates, links, and certainty aligned. Components consume the data; they should not become a second content database.
