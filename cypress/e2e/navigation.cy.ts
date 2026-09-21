@@ -51,38 +51,38 @@ describe("Section navigation (mobile)", () => {
   });
 
   it("uses the tighter mobile offset", () => {
-    cy.get('[aria-label="Toggle menu"]').click();
+    cy.get('[aria-label="Open or close menu"]').click();
     cy.get('[data-testid="mobile-menu"]').contains("About").click();
     cy.wait(1200);
     assertLandedUnderNavbar("about", OFFSET.mobile);
   });
 
   it("opens and closes the hamburger menu", () => {
-    cy.get('[aria-label="Toggle menu"]')
+    cy.get('[aria-label="Open or close menu"]')
       .should("be.visible")
       .and("have.attr", "aria-expanded", "false");
 
-    cy.get('[aria-label="Toggle menu"]').click();
+    cy.get('[aria-label="Open or close menu"]').click();
     cy.get('[data-testid="mobile-menu"]').should("be.visible");
-    cy.get('[aria-label="Toggle menu"]').should(
+    cy.get('[aria-label="Open or close menu"]').should(
       "have.attr",
       "aria-expanded",
       "true",
     );
 
-    cy.get('[aria-label="Toggle menu"]').click();
+    cy.get('[aria-label="Open or close menu"]').click();
     cy.get('[data-testid="mobile-menu"]').should("not.exist");
   });
 
   it("closes the menu after picking a section", () => {
-    cy.get('[aria-label="Toggle menu"]').click();
+    cy.get('[aria-label="Open or close menu"]').click();
     cy.get('[data-testid="mobile-menu"]').contains("Contact").click();
     cy.get('[data-testid="mobile-menu"]').should("not.exist");
     cy.hash().should("eq", "#contact");
   });
 
   it("closes the menu when clicking outside it", () => {
-    cy.get('[aria-label="Toggle menu"]').click();
+    cy.get('[aria-label="Open or close menu"]').click();
     cy.get('[data-testid="mobile-menu"]').should("be.visible");
     cy.get("body").click(20, 650);
     cy.get('[data-testid="mobile-menu"]').should("not.exist");
@@ -93,6 +93,22 @@ describe("Section navigation (mobile)", () => {
     cy.get('#projects [role="button"]').last().click();
     cy.get('[data-testid="project-modal"]').should("be.visible");
     cy.get('[data-testid="project-modal"] img').first().should("be.visible");
+    cy.get('[data-testid="project-links"] a').should("have.length", 2).then(($links) => {
+      const firstTop = $links.eq(0)[0].getBoundingClientRect().top;
+      const secondTop = $links.eq(1)[0].getBoundingClientRect().top;
+      expect(Math.abs(firstTop - secondTop), "project links share a row").to.be.lessThan(2);
+    });
+  });
+
+  it("closes the project modal with the browser back button", () => {
+    cy.get("#projects").scrollIntoView();
+    cy.get('#projects [role="button"]').last().click();
+    cy.get('[data-testid="project-modal"]').should("be.visible");
+
+    cy.go("back");
+
+    cy.get('[data-testid="project-modal"]').should("not.exist");
+    cy.location("pathname").should("eq", "/en");
   });
 });
 
@@ -102,14 +118,14 @@ describe("404 navigation", () => {
 
   it("goes home from the 404 page", () => {
     cy.visitLocale("en", "/no-such-page", notFound);
-    cy.contains("a", "Back to Home").click();
+    cy.contains("a", "Back to the homepage").click();
     cy.location("pathname").should("eq", "/en");
     cy.get("#hero").should("exist");
   });
 
   it("reaches the contact section from the 404 page", () => {
     cy.visitLocale("en", "/no-such-page", notFound);
-    cy.contains("a", "Contact me").click();
+    cy.contains("a", "Start a conversation").click();
     cy.location("pathname").should("eq", "/en");
     cy.get("#contact").should("exist");
   });

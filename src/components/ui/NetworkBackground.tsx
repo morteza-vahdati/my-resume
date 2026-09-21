@@ -22,9 +22,9 @@ export default function NetworkBackground() {
 
     let nodes: Node[] = []
     let animId: number | null = null
-    let time = 0
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     const lowPowerViewport = window.matchMedia("(max-width: 1023px)").matches
+    const frameInterval = lowPowerViewport ? 1000 / 30 : 0
 
     const isMobile = () => window.innerWidth < 768
 
@@ -36,8 +36,12 @@ export default function NetworkBackground() {
     }
     resize()
 
+    const getNodeCount = () => {
+      return isMobile() ? 10 : lowPowerViewport ? 14 : 24
+    }
+
     const createNodes = () => {
-      const count = isMobile() ? 10 : lowPowerViewport ? 14 : 24
+      const count = getNodeCount()
       nodes = Array.from({ length: count }, () => ({
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
@@ -50,14 +54,13 @@ export default function NetworkBackground() {
     createNodes()
 
     const draw = () => {
-      time += 0.01
       const w = window.innerWidth
       const h = window.innerHeight
       ctx.clearRect(0, 0, w, h)
 
       const primary = getComputedStyle(document.documentElement)
         .getPropertyValue("--primary-rgb")
-        .trim()
+        .trim() || "37, 99, 235"
       const accent2 = "99, 102, 241"
       const maxDist = isMobile() ? 120 : lowPowerViewport ? 160 : 220
 
@@ -112,11 +115,16 @@ export default function NetworkBackground() {
       })
     }
 
-    if (reducedMotion || lowPowerViewport) {
+    let lastFrame = 0
+
+    if (reducedMotion) {
       draw()
     } else {
-      const loop = () => {
-        draw()
+      const loop = (now: number) => {
+        if (frameInterval === 0 || now - lastFrame >= frameInterval) {
+          draw()
+          lastFrame = now
+        }
         animId = requestAnimationFrame(loop)
       }
       animId = requestAnimationFrame(loop)
@@ -126,18 +134,21 @@ export default function NetworkBackground() {
     const onResize = () => {
       clearTimeout(resizeTimer)
       resizeTimer = setTimeout(() => {
-        const wasMobile = nodes.length <= 16
         resize()
-        if (wasMobile !== isMobile()) createNodes()
+        if (nodes.length !== getNodeCount()) createNodes()
         if (reducedMotion) draw()
       }, 150)
     }
     window.addEventListener("resize", onResize)
 
+    const themeObserver = new MutationObserver(() => draw())
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+
     return () => {
       if (animId !== null) cancelAnimationFrame(animId)
       clearTimeout(resizeTimer)
       window.removeEventListener("resize", onResize)
+      themeObserver.disconnect()
     }
   }, [])
 

@@ -1,11 +1,11 @@
 "use client"
 
-import ScrollReveal from "@/components/ui/ScrollReveal"
 import GlassCard from "@/components/ui/GlassCard"
 import Badge from "@/components/ui/Badge"
 import SectionHeader from "@/components/ui/SectionHeader"
 import { getExperience } from "@/lib/resume"
 import type { Locale } from "@/i18config"
+import { motion, useReducedMotion } from "framer-motion"
 
 interface ExperienceProps {
   locale: Locale
@@ -18,16 +18,30 @@ export default function Experience({ locale }: ExperienceProps) {
   const title = locale === "fa" ? "تجربه کاری" : "Experience"
 
   const isRtl = locale === "fa"
+  const prefersReducedMotion = useReducedMotion()
 
   return (
     <section id="experience" className="px-4 sm:px-8 py-[clamp(3.5rem,8vw,6rem)] max-w-6xl mx-auto">
       <SectionHeader label={label} title={title} />
 
       <div className={`relative ${isRtl ? "pl-8" : "pr-8"} rtl:pl-8 rtl:pr-0 flex flex-col gap-8`}>
-        <div className={`absolute ${isRtl ? "left-0" : "right-0"} rtl:right-auto rtl:left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-primary rounded-full via-primary/60 to-transparent shadow-[0_0_8px_rgba(var(--primary-rgb),0.3)]`} />
+        <motion.div
+          initial={prefersReducedMotion ? false : { scaleY: 0, opacity: 0.4 }}
+          whileInView={prefersReducedMotion ? undefined : { scaleY: 1, opacity: 1 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.9, ease: [0.25, 0.4, 0.25, 1] }}
+          style={{ transformOrigin: "top" }}
+          className={`absolute ${isRtl ? "left-0" : "right-0"} rtl:right-auto rtl:left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-primary rounded-full via-primary/60 to-transparent shadow-[0_0_8px_rgba(var(--primary-rgb),0.3)]`}
+        />
 
         {experience.map((exp, idx) => (
-          <ScrollReveal key={exp.id} delay={idx * 0.1}>
+          <motion.div
+            key={exp.id}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.45, delay: idx * 0.08, ease: [0.25, 0.4, 0.25, 1] }}
+          >
             <div className="relative">
               <div className={`absolute ${isRtl ? "left-0" : "right-0"} rtl:right-auto rtl:left-0 top-[1.1rem] translate-x-1/2 rtl:-translate-x-1/2 w-4 h-4 rounded-full bg-primary border-[3px] border-background shadow-[0_0_0_4px_rgba(var(--primary-rgb),0.2),0_0_12px_rgba(var(--primary-rgb),0.4)] z-10`} />
               <GlassCard className={`p-5 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-300 ${isRtl ? "mr-6" : "ml-6"} rtl:mr-6 rtl:ml-0`}>
@@ -35,7 +49,7 @@ export default function Experience({ locale }: ExperienceProps) {
                   <h3 className="text-base font-bold text-foreground">{exp.title}</h3>
                   <Badge variant="primary">{exp.period}</Badge>
                 </div>
-                <div className="text-primary text-sm font-semibold mb-3">
+                <div className="mt-1.5 text-primary text-sm font-semibold mb-3">
                   <i className="fa-solid fa-building mr-1.5 rtl:ml-1.5 rtl:mr-0" />
                   {exp.company} · {exp.type}
                 </div>
@@ -49,7 +63,7 @@ export default function Experience({ locale }: ExperienceProps) {
                 </ul>
               </GlassCard>
             </div>
-          </ScrollReveal>
+          </motion.div>
         ))}
       </div>
     </section>

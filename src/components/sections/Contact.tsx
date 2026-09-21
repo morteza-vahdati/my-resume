@@ -31,6 +31,29 @@ interface FormErrors {
   rating?: string
 }
 
+function FieldError({ message }: { message?: string }) {
+  return (
+    <div className="min-h-[1.125rem]" aria-live="polite">
+      <AnimatePresence initial={false}>
+        {message && (
+          <motion.p
+            key={message}
+            initial={{ opacity: 0, y: -2 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -2 }}
+            transition={{ duration: 0.16, ease: "easeOut" }}
+            role="alert"
+            className="text-[0.7rem] leading-[1.125rem] text-red-500 flex items-center gap-1"
+          >
+            <i className="fa-solid fa-circle-exclamation text-[8px]" />
+            {message}
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
 export default function Contact({ locale }: ContactProps) {
   const isRtl = locale === "fa"
   const social = getResumeData().social
@@ -234,7 +257,7 @@ export default function Contact({ locale }: ContactProps) {
 
         <ScrollReveal direction="right">
           <GlassCard className={`p-7 ${isLoading ? "opacity-70 pointer-events-none" : ""} transition-all duration-500`}>
-            <motion.div layout ref={formRef} className="min-h-[380px]">
+            <motion.div ref={formRef} className="min-h-[380px]">
               <AnimatePresence mode="wait">
                 {status === "success" ? (
                   <motion.div
@@ -280,19 +303,7 @@ export default function Contact({ locale }: ContactProps) {
                       disabled={isLoading}
                       dir={isRtl ? "rtl" : "ltr"}
                     />
-                    <AnimatePresence mode="wait">
-                      {errors.name && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -4 }}
-                          className="text-[0.7rem] text-red-500 flex items-center gap-1 mt-1"
-                        >
-                          <i className="fa-solid fa-circle-exclamation text-[8px]" />
-                          {errors.name}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
+                    <FieldError message={errors.name} />
                   </div>
 
                   <div className="space-y-1.5">
@@ -311,19 +322,7 @@ export default function Contact({ locale }: ContactProps) {
                       disabled={isLoading}
                       dir={isRtl ? "rtl" : "ltr"}
                     />
-                    <AnimatePresence mode="wait">
-                      {errors.email && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -4 }}
-                          className="text-[0.7rem] text-red-500 flex items-center gap-1 mt-1"
-                        >
-                          <i className="fa-solid fa-circle-exclamation text-[8px]" />
-                          {errors.email}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
+                    <FieldError message={errors.email} />
                   </div>
 
                   <div className="space-y-1.5">
@@ -341,19 +340,7 @@ export default function Contact({ locale }: ContactProps) {
                       disabled={isLoading}
                       dir={isRtl ? "rtl" : "ltr"}
                     />
-                    <AnimatePresence mode="wait">
-                      {errors.message && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -4 }}
-                          className="text-[0.7rem] text-red-500 flex items-center gap-1 !mt-0"
-                        >
-                          <i className="fa-solid fa-circle-exclamation text-[8px]" />
-                          {errors.message}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
+                    <FieldError message={errors.message} />
                   </div>
 
                   <div className="space-y-1.5">
@@ -364,19 +351,7 @@ export default function Contact({ locale }: ContactProps) {
                       disabled={isLoading}
                       error={!!errors.rating}
                     />
-                    <AnimatePresence mode="wait">
-                      {errors.rating && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -4 }}
-                          className="text-[0.7rem] text-red-500 flex items-center gap-1"
-                        >
-                          <i className="fa-solid fa-circle-exclamation text-[8px]" />
-                          {errors.rating}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
+                    <FieldError message={errors.rating} />
                   </div>
 
                   <div className="absolute opacity-0 h-0 overflow-hidden pointer-events-none" aria-hidden>

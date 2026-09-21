@@ -282,13 +282,13 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
               )}
 
               {(project.links.live || project.links.code) && (
-                <div className="flex flex-wrap gap-3 pt-5 border-t border-border flex-row-reverse justify-start">
+                <div data-testid="project-links" className="flex flex-nowrap gap-2 sm:gap-3 pt-5 border-t border-border flex-row-reverse justify-start">
                   {project.links.live && (
                     <a
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white font-semibold text-sm shadow-[0_4px_14px_rgba(var(--primary-rgb),0.3)] hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(var(--primary-rgb),0.4)] transition-all duration-300"
+                      className="inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 rounded-xl bg-primary text-white font-semibold text-xs sm:text-sm whitespace-nowrap shadow-[0_4px_14px_rgba(var(--primary-rgb),0.3)] hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(var(--primary-rgb),0.4)] transition-all duration-300"
                     >
                       <i className="fa-solid fa-arrow-up-right-from-square" />
                       {isRtl ? "مشاهده نسخه آنلاین" : "View live project"}
@@ -299,7 +299,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
                       href={project.links.code}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-transparent text-foreground border-2 border-border font-semibold text-sm hover:border-primary hover:text-primary hover:-translate-y-0.5 transition-all duration-300"
+                      className="inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 rounded-xl bg-transparent text-foreground border-2 border-border font-semibold text-xs sm:text-sm whitespace-nowrap hover:border-primary hover:text-primary hover:-translate-y-0.5 transition-all duration-300"
                     >
                       <i className="fa-brands fa-github" />
                       {isRtl ? "مشاهده کد پروژه" : "View source code"}

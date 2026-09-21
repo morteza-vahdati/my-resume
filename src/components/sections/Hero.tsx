@@ -75,7 +75,7 @@ export default function Hero({ locale }: HeroProps) {
   return (
     <section
       id="hero"
-      className="min-h-[calc(100dvh-72px)] grid place-items-center px-4 sm:px-8 py-8 relative overflow-hidden"
+      className="min-h-[calc(100svh-72px)] grid place-items-center px-4 sm:px-8 py-8 relative overflow-hidden"
     >
       <div className={`max-w-5xl w-full relative z-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-16`}>
         {/* Avatar with decorative shapes */}
@@ -177,7 +177,7 @@ export default function Hero({ locale }: HeroProps) {
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.65 }}
-        className="static mt-4 md:absolute bottom-8 left-1/2 right-1/2 flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none"
         aria-label={locale === "fa" ? "رفتن به بخش درباره من" : "Explore the about section"}
       >
         <div className="w-6 h-[38px] rounded-full border-2 border-border flex justify-center pt-1.5 hover:border-primary hover:shadow-[0_0_12px_rgba(var(--primary-rgb),0.3)] transition-all duration-300">

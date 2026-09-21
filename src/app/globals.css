@@ -187,6 +187,17 @@
   }
 }
 
+@keyframes experiencePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.2), 0 0 12px rgba(var(--primary-rgb), 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 6px rgba(var(--primary-rgb), 0.1), 0 0 18px rgba(var(--primary-rgb), 0.65);
+  }
+}
+
 @keyframes scrollBounce {
 
   0%,

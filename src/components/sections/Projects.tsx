@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
 import ScrollReveal from "@/components/ui/ScrollReveal"
 import GlassCard from "@/components/ui/GlassCard"
@@ -19,6 +19,25 @@ export default function Projects({ locale }: ProjectsProps) {
 
   const projects = getProjects(locale)
 
+  const closeProject = useCallback(() => {
+    if (window.history.state?.projectModalId) {
+      window.history.back()
+      return
+    }
+    setSelectedProject(null)
+  }, [])
+
+  useEffect(() => {
+    const handlePopState = () => setSelectedProject(null)
+    window.addEventListener("popstate", handlePopState)
+    return () => window.removeEventListener("popstate", handlePopState)
+  }, [])
+
+  const openProject = (project: ProjectWithLocale) => {
+    window.history.pushState({ ...window.history.state, projectModalId: project.id }, "", window.location.href)
+    setSelectedProject(project)
+  }
+
   const label = locale === "fa" ? "آنچه ساخته‌ام" : "Selected work"
   const title = locale === "fa" ? "پروژه‌ها" : "Projects"
   const sub = locale === "fa" ? "چند پروژه که شیوه کارم را نشان می‌دهند" : "A few projects that show how I work"
@@ -32,8 +51,8 @@ export default function Projects({ locale }: ProjectsProps) {
           <ScrollReveal key={project.id} delay={idx * 0.08}>
             <GlassCard
               className={`h-full cursor-pointer overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-[transform,box-shadow] duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30`}
-              onClick={() => setSelectedProject(project)}
-              onKeyDown={(e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelectedProject(project) } }}
+              onClick={() => openProject(project)}
+              onKeyDown={(e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProject(project) } }}
               tabIndex={0}
               role="button"
               aria-label={`${locale === "fa" ? "مشاهده جزئیات پروژه" : "View project details"}: ${project.name}`}
@@ -82,7 +101,7 @@ export default function Projects({ locale }: ProjectsProps) {
         ))}
       </div>
 
-      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} locale={locale} />
+      <ProjectModal project={selectedProject} onClose={closeProject} locale={locale} />
     </section>
   )
 }
