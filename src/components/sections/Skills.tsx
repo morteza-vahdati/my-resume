@@ -15,10 +15,10 @@ interface SkillsProps {
 export default function Skills({ locale }: SkillsProps) {
   const skills = getSkills(locale)
 
-  const label = locale === "fa" ? "چه بلدم" : "What I know"
+  const label = locale === "fa" ? "جعبه‌ابزار من" : "My toolkit"
   const title = locale === "fa" ? "مهارت‌ها" : "Skills"
-  const sub = locale === "fa" ? "تکنولوژی‌هایی که روزانه باهاشون کار می‌کنم" : "Technologies I work with daily"
-  const otherLabel = locale === "fa" ? "سایر تکنولوژی‌ها" : "Other Technologies"
+  const sub = locale === "fa" ? "فناوری‌هایی که برای ساخت محصولات قابل‌استفاده به کار می‌برم" : "Technologies I use to build useful products"
+  const otherLabel = locale === "fa" ? "فناوری‌های مکمل" : "Supporting technologies"
 
   return (
     <section id="skills" className="px-4 sm:px-8 py-[clamp(3.5rem,8vw,6rem)] max-w-6xl mx-auto">

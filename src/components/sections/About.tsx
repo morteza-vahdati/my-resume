@@ -17,9 +17,9 @@ export default function About({ locale }: AboutProps) {
   const initials = personal.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2)
 
   const isRtl = locale === "fa"
-  const sectionLabel = locale === "fa" ? "چه کسی هستم" : "Who I am"
-  const sectionTitle = locale === "fa" ? "درباره من" : "About Me"
-  const letsWork = locale === "fa" ? "بیایید با هم کار کنیم" : "Let's work together"
+  const sectionLabel = locale === "fa" ? "کمی درباره من" : "A little about me"
+  const sectionTitle = locale === "fa" ? "درباره من" : "About me"
+  const letsWork = locale === "fa" ? "بیایید صحبت کنیم" : "Let's talk"
 
   return (
     <section id="about" className="px-4 sm:px-8 py-[clamp(3.5rem,8vw,6rem)] max-w-6xl mx-auto">
@@ -90,7 +90,7 @@ export default function About({ locale }: AboutProps) {
             </div>
             <div className="flex items-center gap-2.5 text-sm text-secondary bg-muted/50 rounded-xl px-3.5 py-2.5 border border-border">
               <i className="fa-solid fa-briefcase text-primary w-4" />
-              {locale === "fa" ? "آماده همکاری" : "Available for hire"}
+              {locale === "fa" ? "آماده همکاری" : "Open to opportunities"}
             </div>
           </div>
 

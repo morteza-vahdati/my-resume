@@ -14,7 +14,7 @@ export default function Education({ locale }: EducationProps) {
   const education = getEducation(locale)
   const courses = getCourses(locale)
 
-  const label = locale === "fa" ? "کجا درس خوندم" : "Where I studied"
+  const label = locale === "fa" ? "مسیر یادگیری من" : "How I keep learning"
   const title = locale === "fa" ? "تحصیلات" : "Education"
 
   return (

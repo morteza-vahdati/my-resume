@@ -17,15 +17,15 @@ export function validate(body: Record<string, unknown>): {
   const { name, email, message, rating } = body
 
   if (typeof name !== "string" || name.trim().length < 2)
-    errors.name = msg("Name must be at least 2 characters.", "نام باید حداقل ۲ حرف باشد")
+    errors.name = msg("Please enter at least 2 characters for your name.", "لطفاً نام را با دست‌کم ۲ حرف وارد کنید.")
 
   if (typeof email !== "string" || !EMAIL_RE.test(email))
-    errors.email = msg("Please enter a valid email address.", "لطفاً یک ایمیل معتبر وارد کنید")
+    errors.email = msg("Please enter a valid email address.", "لطفاً یک ایمیل معتبر وارد کنید.")
 
   if (typeof message !== "string" || message.trim().length < 10)
-    errors.message = msg("Message must be at least 10 characters.", "پیام باید حداقل ۱۰ حرف باشد")
+    errors.message = msg("Please write at least 10 characters.", "لطفاً پیامتان را با دست‌کم ۱۰ حرف بنویسید.")
 
-  if (!rating) errors.rating = msg("Please select a rating.", "لطفاً یک امتیاز انتخاب کنید")
+  if (!rating) errors.rating = msg("Please choose a rating.", "لطفاً امتیازتان را انتخاب کنید.")
 
   return {
     errors,

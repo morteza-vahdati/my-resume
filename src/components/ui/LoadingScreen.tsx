@@ -21,8 +21,8 @@ export default function LoadingScreen({ locale }: LoadingScreenProps) {
 
   const text =
     textLocale === "fa"
-      ? "منتظر باش، دارم خودم رو معرفی می‌کنم"
-      : "Wait, I'm introducing myself"
+      ? "یک لحظه؛ دارم صفحه را آماده می‌کنم"
+      : "One moment — getting things ready"
 
   useEffect(() => {
     let hideTimer: ReturnType<typeof setTimeout> | undefined

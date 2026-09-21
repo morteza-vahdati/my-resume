@@ -60,7 +60,7 @@ export default function LanguageToggle({ locale, onSwitch }: LanguageToggleProps
     <button
       onClick={toggle}
       className="h-9 rounded-xl flex items-center gap-1.5 px-3 text-xs font-bold tracking-wider text-secondary border border-border bg-white/55 dark:bg-white/5 backdrop-blur hover:text-primary hover:border-primary transition-all duration-150 cursor-pointer"
-      aria-label="Change language"
+      aria-label={locale === "fa" ? "تغییر زبان به انگلیسی" : "Switch language to Persian"}
     >
       <i className="fa-solid fa-globe text-sm" />
       <span>{locale === "en" ? "FA" : "EN"}</span>

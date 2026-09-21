@@ -39,8 +39,8 @@ const config: Record<ToastType, { icon: string; bg: string; border: string; colo
 }
 
 const labels: Record<"en" | "fa", Record<ToastType, string>> = {
-  en: { success: "Success", error: "Error", info: "Info" },
-  fa: { success: "موفق", error: "خطا", info: "اطلاعات" },
+  en: { success: "Sent", error: "Could not send", info: "Note" },
+  fa: { success: "ارسال شد", error: "ارسال نشد", info: "توجه" },
 }
 
 export default function Toast({ data, onClose, duration = 5000, locale }: ToastProps) {
@@ -75,7 +75,7 @@ export default function Toast({ data, onClose, duration = 5000, locale }: ToastP
       <button
         onClick={onClose}
         className="flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center text-muted-foreground/60 hover:text-foreground hover:bg-muted/50 transition-all duration-200 outline-none"
-        aria-label="Close"
+        aria-label={locale === "fa" ? "بستن پیام" : "Close notification"}
       >
         <i className="fa-solid fa-xmark text-xs" />
       </button>

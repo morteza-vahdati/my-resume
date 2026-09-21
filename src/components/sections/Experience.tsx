@@ -14,7 +14,7 @@ interface ExperienceProps {
 export default function Experience({ locale }: ExperienceProps) {
   const experience = getExperience(locale)
 
-  const label = locale === "fa" ? "کجا کار کردم" : "Where I've worked"
+  const label = locale === "fa" ? "مسیر حرفه‌ای من" : "Where I've contributed"
   const title = locale === "fa" ? "تجربه کاری" : "Experience"
 
   const isRtl = locale === "fa"

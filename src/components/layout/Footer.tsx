@@ -13,7 +13,7 @@ export default function Footer({ locale }: FooterProps) {
   return (
     <footer className="text-center py-8 text-muted-foreground text-xs border-t border-border relative z-10">
       <p>
-        {locale === "fa" ? "طراحی و ساخته شده با" : "Designed & Built with"}{" "}
+        {locale === "fa" ? "ساخته‌شده با" : "Designed and built with"}{" "}
         <span className="text-primary font-semibold">♥</span>{" "}
         {locale === "fa" ? "توسط" : "by"}{" "}
         <span className="text-primary font-semibold">{personal.name}</span>

@@ -4,7 +4,7 @@ import { checkRate, getIp, isAllowedOrigin, isTooFast } from "../guards";
 import { sendContactMail, smtpConfigured } from "./mailer";
 import { validate } from "./validate";
 
-const INVALID = msg("Invalid request", "درخواست نامعتبر");
+const INVALID = msg("We couldn't understand that request.", "درخواست قابل پردازش نیست.");
 
 function fail(error: ReturnType<typeof msg>, status: number) {
   return NextResponse.json({ error }, { status });
@@ -13,7 +13,7 @@ function fail(error: ReturnType<typeof msg>, status: number) {
 export async function POST(req: NextRequest) {
   try {
     if (!isAllowedOrigin(req)) {
-      return fail(msg("Forbidden", "دسترسی غیرمجاز"), 403);
+      return fail(msg("This request is not allowed.", "این درخواست مجاز نیست."), 403);
     }
 
     const body = await req.json();
@@ -25,8 +25,8 @@ export async function POST(req: NextRequest) {
     if (!checkRate(getIp(req))) {
       return fail(
         msg(
-          "Too many requests. Please try again later.",
-          "تعداد درخواست‌ها بیش از حد مجاز است. لطفاً بعداً تلاش کنید.",
+          "There have been too many attempts. Please try again in a little while.",
+          "تلاش‌های زیادی انجام شده است. لطفاً کمی بعد دوباره امتحان کنید.",
         ),
         429,
       );
@@ -48,8 +48,8 @@ export async function POST(req: NextRequest) {
     if (!(await sendContactMail(value))) {
       return fail(
         msg(
-          "We couldn't deliver your message. Please email me directly.",
-          "ارسال پیام ممکن نشد. لطفاً مستقیم ایمیل بزنید.",
+          "We couldn't deliver your message. Please email me directly instead.",
+          "ارسال پیام ممکن نشد. لطفاً این بار مستقیم ایمیل بزنید.",
         ),
         502,
       );
@@ -60,8 +60,8 @@ export async function POST(req: NextRequest) {
     console.error("Contact API error:", err);
     return fail(
       msg(
-        "Something went wrong. Please try again later.",
-        "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
+        "Something went wrong on our side. Please try again later.",
+        "در سمت ما مشکلی پیش آمد. لطفاً کمی بعد دوباره تلاش کنید.",
       ),
       500,
     );

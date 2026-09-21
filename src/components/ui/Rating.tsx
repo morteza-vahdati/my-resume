@@ -12,13 +12,13 @@ interface RatingProps {
 }
 
 const labels: Record<"en" | "fa", string[]> = {
-  en: ["Poor", "Fair", "Good", "Very Good", "Excellent"],
-  fa: ["ضعیف", "متوسط", "خوب", "خیلی خوب", "عالی"],
+  en: ["Needs work", "Fair", "Good", "Very good", "Excellent"],
+  fa: ["نیازمند بهبود", "قابل قبول", "خوب", "خیلی خوب", "عالی"],
 }
 
 const starLabel: Record<"en" | "fa", string> = {
-  en: "Rating",
-  fa: "امتیاز",
+  en: "Your experience",
+  fa: "نظر شما",
 }
 
 export default function Rating({ value, onChange, locale, disabled, error }: RatingProps) {
@@ -64,7 +64,7 @@ export default function Rating({ value, onChange, locale, disabled, error }: Rat
                   ? "bg-primary/20 text-primary shadow-[0_0_14px_rgba(var(--primary-rgb),0.3)] border-primary/40"
                   : "bg-muted/40 text-muted-foreground/60 hover:bg-primary/10 hover:text-primary/50"
                 }`}
-              aria-label={`${star} star${star > 1 ? "s" : ""}`}
+              aria-label={locale === "fa" ? `${star} ستاره از ۵` : `${star} out of 5 stars`}
             >
               <i className={`${active ? "fa-solid" : "fa-regular"} fa-star text-[10px]`} />
             </motion.button>

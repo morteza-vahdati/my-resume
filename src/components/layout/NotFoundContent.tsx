@@ -53,13 +53,13 @@ export default function NotFoundContent({ locale: initialLocale }: { locale: Loc
             </div>
 
             <h1 className="text-2xl font-extrabold tracking-tight text-foreground mb-3 font-display">
-              {isRtl ? "صفحه‌ای که به دنبال آن هستید یافت نشد" : "Page not found"}
+              {isRtl ? "این صفحه پیدا نشد" : "We couldn't find that page"}
             </h1>
 
             <p className="text-muted-foreground text-sm leading-relaxed mb-8 max-w-sm mx-auto">
               {isRtl
-                ? "به نظر می‌رسد صفحه‌ای که به دنبال آن هستید وجود ندارد یا به مکان دیگری منتقل شده است. شاید یکی از لینک‌های زیر کمکتان کند."
-                : "The page you're looking for doesn't exist or has been moved to another location. Maybe one of the links below can help."}
+                ? "به نظر می‌رسد این صفحه وجود ندارد یا به آدرس دیگری منتقل شده است. از یکی از گزینه‌های زیر ادامه دهید."
+                : "This page may not exist or may have moved. Use one of the options below to keep exploring."}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -68,14 +68,14 @@ export default function NotFoundContent({ locale: initialLocale }: { locale: Loc
                 className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(var(--primary-rgb),0.35)] transition-all duration-300 w-full sm:w-auto justify-center"
               >
                 <i className="fa-solid fa-house text-xs" />
-                {isRtl ? "بازگشت به خانه" : "Back to Home"}
+                {isRtl ? "بازگشت به صفحه اصلی" : "Back to the homepage"}
               </Link>
               <Link
                 href={`/${locale}#contact`}
                 className="inline-flex items-center gap-2 px-7 py-3 rounded-xl border border-border text-secondary font-semibold text-sm hover:border-primary hover:text-primary hover:bg-primary/5 hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto justify-center"
               >
                 <i className="fa-solid fa-envelope text-xs" />
-                {isRtl ? "تماس با من" : "Contact me"}
+                {isRtl ? "شروع یک گفت‌وگو" : "Start a conversation"}
               </Link>
             </div>
           </div>

@@ -19,9 +19,9 @@ export default function Projects({ locale }: ProjectsProps) {
 
   const projects = getProjects(locale)
 
-  const label = locale === "fa" ? "چی ساختم" : "What I've built"
+  const label = locale === "fa" ? "آنچه ساخته‌ام" : "Selected work"
   const title = locale === "fa" ? "پروژه‌ها" : "Projects"
-  const sub = locale === "fa" ? "نمونه‌ای از کارهای اخیر" : "A selection of recent work"
+  const sub = locale === "fa" ? "چند پروژه که شیوه کارم را نشان می‌دهند" : "A few projects that show how I work"
 
   return (
     <section id="projects" className="px-4 sm:px-8 py-[clamp(3.5rem,8vw,6rem)] max-w-6xl mx-auto">
@@ -36,7 +36,7 @@ export default function Projects({ locale }: ProjectsProps) {
               onKeyDown={(e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setSelectedProject(project) } }}
               tabIndex={0}
               role="button"
-              aria-label={`${locale === "fa" ? "مشاهده جزئیات" : "View details"} ${project.name}`}
+              aria-label={`${locale === "fa" ? "مشاهده جزئیات پروژه" : "View project details"}: ${project.name}`}
             >
               <div className="relative h-48 sm:h-52 overflow-hidden bg-muted">
                 {project.images[0] ? (
