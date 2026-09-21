@@ -18,9 +18,9 @@ interface NavbarProps {
 const navItems = (locale: Locale) => [
   { key: "about", label: locale === "fa" ? "درباره من" : "About" },
   { key: "skills", label: locale === "fa" ? "مهارت‌ها" : "Skills" },
-  { key: "experience", label: locale === "fa" ? "تجربه" : "Experience" },
+  { key: "experience", label: locale === "fa" ? "تجربه کاری" : "Experience" },
   { key: "projects", label: locale === "fa" ? "پروژه‌ها" : "Projects" },
-  { key: "contact", label: locale === "fa" ? "تماس" : "Contact" },
+  { key: "contact", label: locale === "fa" ? "ارتباط" : "Contact" },
 ]
 
 export default function Navbar({ locale, onLocaleSwitch }: NavbarProps) {
@@ -30,11 +30,27 @@ export default function Navbar({ locale, onLocaleSwitch }: NavbarProps) {
   const pathname = usePathname()
 
   const prevHashRef = useRef<string>("");
+  const mobileMenuRef = useRef<HTMLElement>(null)
+  const menuToggleRef = useRef<HTMLButtonElement>(null)
 
   const personal = getPersonal(locale)
 
   const homePath = `/${locale}`
   const isHome = pathname === homePath || pathname === "/"
+
+  useEffect(() => {
+    if (!menuOpen) return
+
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      const target = event.target
+      if (!(target instanceof Node)) return
+      if (mobileMenuRef.current?.contains(target) || menuToggleRef.current?.contains(target)) return
+      setMenuOpen(false)
+    }
+
+    document.addEventListener("pointerdown", closeOnOutsidePointer)
+    return () => document.removeEventListener("pointerdown", closeOnOutsidePointer)
+  }, [menuOpen])
 
   const syncFromHash = useCallback(
     (hash?: string) => {
@@ -112,7 +128,7 @@ export default function Navbar({ locale, onLocaleSwitch }: NavbarProps) {
           className="flex items-center gap-2.5 text-base sm:text-lg font-extrabold tracking-tight text-foreground cursor-pointer"
         >
           <span className="size-8 rounded-xl flex items-center justify-center shadow-[0_2px_8px_rgba(var(--primary-rgb),0.2)]">
-            <Image alt="logo" width={32} height={32} src="/logo.png" />
+            <Image alt={locale === "fa" ? "لوگوی مرتضی وحدتی" : "Morteza Vahdati logo"} width={32} height={32} src="/logo.png" />
           </span>
           <span>{personal.name}</span>
         </button>
@@ -138,13 +154,15 @@ export default function Navbar({ locale, onLocaleSwitch }: NavbarProps) {
         </ul>
 
         <div className="flex items-center gap-2 md:justify-self-end">
-          <ThemeToggle />
+          <ThemeToggle locale={locale} />
           <LanguageToggle locale={locale} onSwitch={onLocaleSwitch} />
           <button
+            ref={menuToggleRef}
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden flex flex-col gap-1 p-1.5 cursor-pointer"
-            aria-label="Toggle menu"
+            aria-label={locale === "fa" ? "باز و بسته کردن منو" : "Open or close menu"}
             aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             <motion.span
               animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
@@ -165,6 +183,8 @@ export default function Navbar({ locale, onLocaleSwitch }: NavbarProps) {
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
+            ref={mobileMenuRef}
+            id="mobile-menu"
             data-testid="mobile-menu"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}

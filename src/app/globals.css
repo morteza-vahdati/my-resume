@@ -99,7 +99,21 @@
     font-family: 'Space Grotesk', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
+    user-select: none;
+    -webkit-user-select: none;
     transition: background-color 0.4s ease, color 0.25s ease;
+  }
+
+  input,
+  textarea,
+  [contenteditable="true"] {
+    user-select: text;
+    -webkit-user-select: text;
+  }
+
+  img {
+    -webkit-user-drag: none;
+    user-drag: none;
   }
 
   html[dir="rtl"] body {
@@ -222,5 +236,12 @@
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .backdrop-blur-xl {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
   }
 }

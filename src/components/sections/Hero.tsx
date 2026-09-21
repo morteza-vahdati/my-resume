@@ -7,6 +7,7 @@ import { getPersonal } from "@/lib/resume"
 import Typewriter from "@/components/ui/Typewriter"
 import LinkButton from "@/components/ui/LinkButton"
 import { smoothScrollToElement } from "@/lib/scroll"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
 
 interface HeroProps {
   locale: Locale
@@ -55,12 +56,13 @@ const blobShapes = [
 
 export default function Hero({ locale }: HeroProps) {
   const personal = getPersonal(locale)
+  const compactViewport = useMediaQuery("(max-width: 1023px)")
 
   const t = {
     dl: locale === "fa" ? "دانلود رزومه" : "Download CV",
-    cta: locale === "fa" ? "تماس بگیرید" : "Get in Touch",
-    scroll: locale === "fa" ? "اسکرول" : "Scroll",
-    badge: locale === "fa" ? "آماده همکاری" : "Available for work",
+    cta: locale === "fa" ? "بیایید صحبت کنیم" : "Let's talk",
+    scroll: locale === "fa" ? "بیشتر ببینید" : "Explore",
+    badge: locale === "fa" ? "آماده همکاری" : "Open to opportunities",
   }
 
   const scrollDown = () => {
@@ -83,10 +85,10 @@ export default function Hero({ locale }: HeroProps) {
           transition={{ duration: 0.8, delay: 0.15 }}
           className="relative flex-shrink-0"
         >
-          {blobShapes.map((s, i) => (
+          {!compactViewport && blobShapes.map((s, i) => (
             <motion.div
               key={i}
-              className={`absolute bg-gradient-to-br ${s.gradient} blur-2xl`}
+              className={`hidden lg:block absolute bg-gradient-to-br ${s.gradient} blur-2xl`}
               style={{
                 width: s.width,
                 height: s.height,
@@ -105,7 +107,7 @@ export default function Hero({ locale }: HeroProps) {
           <motion.div
             className="relative w-48 h-60 sm:w-64 sm:h-[22rem] border-4 border-white/60 dark:border-white/10 shadow-2xl overflow-hidden bg-primary/10"
             style={{ borderRadius: "40% 60% 50% 50% / 50% 40% 60% 50%" }}
-            whileHover={{ scale: 1.05, rotate: 2 }}
+            whileHover={compactViewport ? undefined : { scale: 1.05, rotate: 2 }}
             transition={{ duration: 0.3 }}
           >
             <Image src="/images/profiles/hero.jpg" alt={personal.name} fill className="object-cover" sizes="(max-width: 640px) 176px, 208px" />
@@ -176,7 +178,7 @@ export default function Hero({ locale }: HeroProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.65 }}
         className="static mt-4 md:absolute bottom-8 left-1/2 right-1/2 flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none"
-        aria-label="Scroll to about section"
+        aria-label={locale === "fa" ? "رفتن به بخش درباره من" : "Explore the about section"}
       >
         <div className="w-6 h-[38px] rounded-full border-2 border-border flex justify-center pt-1.5 hover:border-primary hover:shadow-[0_0_12px_rgba(var(--primary-rgb),0.3)] transition-all duration-300">
           <div className="w-1 h-2 rounded-full bg-primary animate-[scrollBounce_1.8s_ease-in-out_infinite]" />

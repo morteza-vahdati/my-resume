@@ -80,6 +80,20 @@ describe("Section navigation (mobile)", () => {
     cy.get('[data-testid="mobile-menu"]').should("not.exist");
     cy.hash().should("eq", "#contact");
   });
+
+  it("closes the menu when clicking outside it", () => {
+    cy.get('[aria-label="Toggle menu"]').click();
+    cy.get('[data-testid="mobile-menu"]').should("be.visible");
+    cy.get("body").click(20, 650);
+    cy.get('[data-testid="mobile-menu"]').should("not.exist");
+  });
+
+  it("opens the project modal without an animated scale jump", () => {
+    cy.get("#projects").scrollIntoView();
+    cy.get('#projects [role="button"]').last().click();
+    cy.get('[data-testid="project-modal"]').should("be.visible");
+    cy.get('[data-testid="project-modal"] img').first().should("be.visible");
+  });
 });
 
 describe("404 navigation", () => {

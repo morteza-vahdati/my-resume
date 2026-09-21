@@ -1,7 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { useRef } from "react"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
 
 interface ScrollRevealProps {
   children: React.ReactNode
@@ -19,11 +20,17 @@ export default function ScrollReveal({
   duration = 0.5,
 }: ScrollRevealProps) {
   const ref = useRef(null)
+  const prefersReducedMotion = useReducedMotion()
+  const compactViewport = useMediaQuery("(max-width: 1023px)")
 
   const directionOffset = {
     up: { y: 40 },
     left: { x: -40 },
     right: { x: 40 },
+  }
+
+  if (prefersReducedMotion || compactViewport) {
+    return <div className={className}>{children}</div>
   }
 
   return (

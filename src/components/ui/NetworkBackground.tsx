@@ -24,11 +24,12 @@ export default function NetworkBackground() {
     let animId: number | null = null
     let time = 0
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const lowPowerViewport = window.matchMedia("(max-width: 1023px)").matches
 
     const isMobile = () => window.innerWidth < 768
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      const dpr = lowPowerViewport ? 1 : Math.min(window.devicePixelRatio || 1, 2)
       canvas.width = window.innerWidth * dpr
       canvas.height = window.innerHeight * dpr
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
@@ -36,7 +37,7 @@ export default function NetworkBackground() {
     resize()
 
     const createNodes = () => {
-      const count = isMobile() ? 16 : 32
+      const count = isMobile() ? 10 : lowPowerViewport ? 14 : 24
       nodes = Array.from({ length: count }, () => ({
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
@@ -58,7 +59,7 @@ export default function NetworkBackground() {
         .getPropertyValue("--primary-rgb")
         .trim()
       const accent2 = "99, 102, 241"
-      const maxDist = isMobile() ? 150 : 220
+      const maxDist = isMobile() ? 120 : lowPowerViewport ? 160 : 220
 
       nodes.forEach((node) => {
         node.x += node.vx
@@ -111,7 +112,7 @@ export default function NetworkBackground() {
       })
     }
 
-    if (reducedMotion) {
+    if (reducedMotion || lowPowerViewport) {
       draw()
     } else {
       const loop = () => {
