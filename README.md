@@ -77,7 +77,16 @@ cypress/          End-to-end specifications and support setup
 
 ## Environment
 
-All variables are optional. Copy `.env.example` to `.env` to configure SMTP and the public site origin. Set `SITE_URL` to the real production domain so canonical URLs, sitemap, robots, and Cypress use the right host.
+All variables are optional. Copy `.env.example` to `.env` for local configuration. The contact endpoint still accepts valid submissions without SMTP and returns `emailSent: false`; configure mail delivery when messages should arrive in your inbox.
+
+| Variable | Purpose |
+| --- | --- |
+| `SITE_URL` | Public origin used for canonical URLs, hreflang links, sitemap, robots, the contact origin check, and the Cypress base URL. |
+| `SMTP_HOST`, `SMTP_PORT` | SMTP server connection details. |
+| `SMTP_USER`, `SMTP_PASS` | SMTP credentials. |
+| `FROM_EMAIL`, `CONTACT_TO` | Sender and recipient for contact messages. |
+
+Keep `.env` out of version control. In production, provide these values through the hosting provider's secret configuration and set `SITE_URL` to the real public domain.
 
 ## Content workflow
 
