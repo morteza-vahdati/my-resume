@@ -55,27 +55,27 @@
     },
     "typewriter": {
       "en": [
-        "modern web apps",
-        "responsive UIs",
-        "performant dashboards",
-        "clean code",
-        "interactive experiences",
-        "scalable solutions",
-        "beautiful interfaces"
+        "React and Next.js dashboards",
+        "responsive web interfaces",
+        "TypeScript applications",
+        "clear user flows",
+        "performance-focused UI",
+        "full-stack web systems",
+        "bilingual RTL experiences"
       ],
       "fa": [
-        "برنامه‌های وب مدرن",
-        "رابط‌های کاربری ریسپانسیو",
-        "داشبوردهای بهینه",
-        "کد تمیز",
-        "تجربه‌های تعاملی",
-        "راهکارهای مقیاس‌پذیر",
-        "رابط‌های کاربری زیبا"
+        "داشبوردهای React و Next.js",
+        "رابط‌های وب ریسپانسیو",
+        "برنامه‌های TypeScript",
+        "جریان‌های کاربری روشن",
+        "رابط کاربری با تمرکز بر عملکرد",
+        "سامانه‌های وب فول‌استک",
+        "تجربه‌های دو زبانه و راست‌به‌چپ"
       ]
     },
     "about": {
-      "en": "Web developer with experience in designing and implementing modern and responsive user interfaces. Experienced in team projects with a focus on improving user experience and code quality. Passionate about continuous learning and upgrading technical skills. Currently seeking a new job opportunity for professional growth and effective collaboration in software development teams.",
-      "fa": "توسعه‌دهنده وب با تجربه در طراحی و پیاده‌سازی رابط‌های کاربری مدرن و ریسپانسیو. سابقه همکاری در پروژه‌های تیمی و تمرکز بر بهبود تجربه کاربری و کیفیت کد. به یادگیری مستمر و ارتقای مهارت‌های فنی علاقه‌مند هستم. در حال حاضر به دنبال فرصت شغلی جدید برای رشد حرفه‌ای و مشارکت مؤثر در تیم‌های توسعه نرم‌افزار می‌باشم."
+      "en": "Web developer focused on turning complex requirements into clear, responsive web experiences with React, Next.js, and TypeScript. My work spans dashboard interfaces, performance tuning, debugging, and team projects where development and analysis need to move together. I am open to a new opportunity where I can keep learning, contribute thoughtfully, and help turn good ideas into usable products.",
+      "fa": "توسعه‌دهنده وب با تمرکز بر تبدیل نیازمندی‌های پیچیده به تجربه‌های وبِ روشن و ریسپانسیو با React، Next.js و TypeScript. تجربه من شامل طراحی رابط‌های داشبورد، بهینه‌سازی عملکرد، رفع اشکال و همکاری در پروژه‌های تیمی است؛ جایی که تیم‌های توسعه و تحلیل باید هم‌زمان پیش بروند. برای فرصت جدیدی آماده‌ام که در آن یاد بگیرم، مسئولانه مشارکت کنم و به تبدیل ایده‌های خوب به محصولات قابل‌استفاده کمک کنم."
     },
     "photo": "/images/avatar.jpg",
     "resumePdf": {
@@ -85,7 +85,7 @@
   },
 
   "social": {
-    "github": "https://github.com/mvahdati",
+    "github": "https://github.com/morteza-vahdati",
     "linkedin": "https://linkedin.com/in/mvahdati",
     "email": "mvahdati1382@gmail.com",
     "phone": "09367635074"
@@ -120,16 +120,16 @@
       },
       "descriptions": {
         "en": [
-          "Designed and developed web-based dashboard UIs using React and Next.js",
-          "Built responsive and interactive user interfaces",
-          "Performance optimization and code debugging",
-          "Collaborated with development and analysis teams"
+          "Design and develop web-based dashboard interfaces with React and Next.js",
+          "Build responsive, interactive interfaces for web-based workflows",
+          "Investigate performance issues and debug implementation details",
+          "Collaborate with development and analysis teams across analysis, development, and deployment"
         ],
         "fa": [
-          "طراحی و پیاده‌سازی رابط کاربری داشبوردهای تحت وب با React و Next.js",
-          "طراحی و پیاده‌سازی رابط کاربری Responsive",
-          "بهینه‌سازی عملکرد و رفع اشکال کد",
-          "همکاری با تیم‌های توسعه و تحلیل برای تحلیل، توسعه و استقرار"
+          "طراحی و پیاده‌سازی رابط‌های داشبورد تحت وب با React و Next.js",
+          "ساخت رابط‌های کاربری ریسپانسیو و تعاملی برای جریان‌های کاری وب",
+          "بررسی مسائل عملکردی و رفع اشکال جزئیات پیاده‌سازی",
+          "همکاری با تیم‌های توسعه و تحلیل در فرایند تحلیل، توسعه و استقرار"
         ]
       }
     },
@@ -161,14 +161,14 @@
       },
       "descriptions": {
         "en": [
-          "Developed and designed responsive web UIs",
-          "Participated in team projects",
-          "Analyzed and resolved technical issues"
+          "Designed and developed responsive web interfaces",
+          "Contributed to team-based web projects",
+          "Analyzed technical issues and helped move fixes into implementation"
         ],
         "fa": [
-          "توسعه و طراحی رابط کاربری برای وب‌سایت‌های ریسپانسیو",
-          "مشارکت در پروژه‌های تیمی",
-          "تحلیل و رفع اشکالات فنی"
+          "طراحی و توسعه رابط‌های وب ریسپانسیو",
+          "مشارکت در توسعه پروژه‌های وب تیمی",
+          "تحلیل مسائل فنی و همراهی در پیاده‌سازی راه‌حل‌ها"
         ]
       }
     }
@@ -301,12 +301,12 @@
             "percentage": 70
           },
           {
-            "name": "Next-Auth",
+            "name": "NextAuth",
             "level": { "en": "Intermediate", "fa": "متوسط" },
             "percentage": 70
           },
           {
-            "name": "GIT",
+            "name": "Git",
             "level": { "en": "Advanced", "fa": "پیشرفته" },
             "percentage": 80
           }
@@ -320,7 +320,7 @@
       "Zod",
       "Zustand",
       "Figma",
-      "Figjam",
+      "FigJam",
       "Trello"
     ]
   },
@@ -338,23 +338,23 @@
         "fa": "توسعه‌دهنده فول‌استک"
       },
       "description": {
-        "en": "A custom order-based system with user registration, resume display, articles, and educational content with communication features. Developed as a team project using Next.js and NestJS. Currently in development and will be published soon.",
-        "fa": "یک سامانه سفارشی با قابلیت ثبت نام کاربران، نمایش رزومه، مقالات و جزوات آموزشی و ایجاد راه‌های ارتباطی. با استفاده از Next.js و NestJS توسعه داده شده است. پروژه به صورت تیمی در حال توسعه بوده و به زودی منتشر خواهد شد."
+        "en": "A team-built custom system for user registration, resume pages, articles, educational content, and communication features. Developed with Next.js and NestJS, with publication still in progress.",
+        "fa": "سامانه‌ای سفارشی و تیمی برای ثبت‌نام کاربران، صفحه‌های رزومه، مقالات، محتوای آموزشی و امکانات ارتباطی. این پروژه با Next.js و NestJS توسعه داده شده و انتشار آن همچنان در دست توسعه است."
       },
       "details": {
         "en": [
-          "Architected full-stack solution with Next.js frontend and NestJS backend",
+          "Built the full-stack solution with a Next.js frontend and NestJS backend",
           "Implemented user authentication and role-based access control",
-          "Designed database schema with Prisma ORM and PostgreSQL",
-          "Built responsive UI with Tailwind CSS and glassmorphism design",
-          "Managed code quality with TypeScript and ESLint"
+          "Modeled application data with Prisma ORM and PostgreSQL",
+          "Built responsive UI with Tailwind CSS and a glassmorphism visual style",
+          "Used TypeScript and ESLint to support code quality"
         ],
         "fa": [
-          "معماری فول‌استک با Next.js و NestJS",
+          "پیاده‌سازی راهکار فول‌استک با فرانت‌اند Next.js و بک‌اند NestJS",
           "پیاده‌سازی احراز هویت کاربران و کنترل دسترسی نقش‌محور",
-          "طراحی دیتابیس با Prisma و PostgreSQL",
-          "رابط کاربری ریسپانسیو با Tailwind CSS و طراحی شیشه‌ای",
-          "مدیریت کیفیت کد با TypeScript و ESLint"
+          "مدل‌سازی داده‌های سامانه با Prisma ORM و PostgreSQL",
+          "ساخت رابط کاربری ریسپانسیو با Tailwind CSS و سبک بصری شیشه‌ای",
+          "استفاده از TypeScript و ESLint برای پشتیبانی از کیفیت کد"
         ]
       },
       "tags": ["Next.js", "NestJS", "TypeScript", "Prisma", "Tailwind"],
@@ -378,21 +378,21 @@
         "fa": "توسعه‌دهنده وب"
       },
       "description": {
-        "en": "Collaborated remotely on a health-oriented social network. Coordinated with various teams, used Trello for project management, and held online meetings for project goal alignment.",
-        "fa": "همکاری در توسعه یک شبکه اجتماعی سلامت محور به صورت ریموت. هماهنگی با تیم‌های مختلف، استفاده از Trello و برگزاری جلسات آنلاین برای پیشبرد اهداف پروژه."
+        "en": "Participated in Madeliran from its initial version onward, contributing remotely to React and TypeScript web features for a health-focused social platform. Trello and online meetings supported cross-team coordination, planning, and shared progress.",
+        "fa": "از نسخه اولیه مادلیران به بعد در این پروژه مشارکت داشتم و به‌صورت ریموت در توسعه قابلیت‌های وب با React و TypeScript برای یک پلتفرم اجتماعی سلامت‌محور همکاری کردم. هماهنگی بین تیم‌ها، برنامه‌ریزی و پیگیری پیشرفت با Trello و جلسه‌های آنلاین انجام می‌شد."
       },
       "details": {
         "en": [
-          "Developed web features for a health-focused social platform",
-          "Collaborated remotely with cross-functional teams",
-          "Used Trello for agile project management and sprint planning",
-          "Participated in daily stand-ups and weekly sprint reviews"
+          "Participated in Madeliran from its initial version onward",
+          "Contributed to React and TypeScript web features for a health-focused social platform",
+          "Collaborated remotely across teams using Trello and online meetings",
+          "Supported shared planning, coordination, and project progress"
         ],
         "fa": [
-          "توسعه قابلیت‌های وب برای یک پلتفرم اجتماعی سلامت‌محور",
-          "همکاری ریموت با تیم‌های مختلف",
-          "مدیریت پروژه با Trello و برنامه‌ریزی اسپرینت",
-          "شرکت در جلسات روزانه و مرور اسپرینت هفتگی"
+          "مشارکت در مادلیران از نسخه اولیه به بعد",
+          "همکاری در توسعه قابلیت‌های وب با React و TypeScript برای یک پلتفرم اجتماعی سلامت‌محور",
+          "همکاری ریموت با تیم‌های مختلف با استفاده از Trello و جلسه‌های آنلاین",
+          "مشارکت در برنامه‌ریزی مشترک، هماهنگی و پیگیری پیشرفت پروژه"
         ]
       },
       "tags": ["React", "TypeScript", "Trello", "Team Collaboration"],
@@ -406,39 +406,39 @@
     },
     {
       "id": 3,
-      "slug": "co-website",
+      "slug": "portfolio",
       "name": {
-        "en": "Co-Website",
-        "fa": "Co-Website"
+        "en": "Portfolio",
+        "fa": "پورتفولیو شخصی"
       },
       "role": {
         "en": "Web Developer",
         "fa": "توسعه‌دهنده وب"
       },
       "description": {
-        "en": "A prototype design inspired by a reference project. Built as a learning exercise to implement modern frontend patterns.",
-        "fa": "یک نمونه طرح اولیه که تحت تأثیر یک پروژه مرجع ساخته شده و تصمیم به پیاده‌سازی آن گرفتم."
+        "en": "A bilingual resume website that brings together English and Persian RTL layouts, responsive UI, themes, and a focused contact experience with Next.js, React, TypeScript, and Tailwind CSS.",
+        "fa": "وب‌سایت رزومه‌ای دو زبانه که چیدمان انگلیسی و فارسی راست‌به‌چپ، رابط کاربری ریسپانسیو، تم‌ها و تجربه تماس متمرکز را با Next.js، React، TypeScript و Tailwind CSS کنار هم قرار می‌دهد."
       },
       "details": {
         "en": [
-          "Built a complete landing page prototype from scratch",
-          "Implemented modern CSS layout techniques (Flexbox, Grid)",
-          "Focused on clean component architecture and code organization"
+          "Built a bilingual single-page resume with the Next.js App Router",
+          "Implemented locale-aware routing with English and Persian RTL layouts",
+          "Added light and dark themes, responsive UI, SEO metadata, and a protected contact form"
         ],
         "fa": [
-          "ساخت یک نمونه صفحه فرود کامل از ابتدا",
-          "پیاده‌سازی تکنیک‌های مدرن CSS (Flexbox, Grid)",
-          "تمرکز بر معماری تمیز کامپوننت‌ها و سازماندهی کد"
+          "ساخت رزومه تک‌صفحه‌ای دو زبانه با App Router در Next.js",
+          "پیاده‌سازی مسیریابی محلی با چیدمان انگلیسی و فارسی راست‌به‌چپ",
+          "افزودن تم روشن و تاریک، رابط کاربری ریسپانسیو، متادیتای سئو و فرم تماس محافظت‌شده"
         ]
       },
-      "tags": ["React", "Web"],
+      "tags": ["Next.js", "React", "TypeScript", "Tailwind"],
       "links": {
-        "code": "",
-        "live": "https://co-website.liara.run/"
+        "code": "https://github.com/morteza-vahdati/portfolio",
+        "live": "http://morteza-vahdati.vercel.app"
       },
       "year": "2023",
       "featured": false,
-      "images": ["/images/projects/co-website/_cover.png"]
+      "images": ["/images/projects/resume/_cover.png", "/images/projects/resume/hero.png","/images/projects/resume/contact.png"]
     }
   ],
 
@@ -448,12 +448,12 @@
       "fa": "مرتضی وحدتی | توسعه‌دهنده وب"
     },
     "description": {
-      "en": "Web developer specializing in React, Next.js, and TypeScript. Building modern, responsive, and performant web applications.",
-      "fa": "توسعه‌دهنده وب متخصص در React، Next.js و TypeScript. طراحی و توسعه برنامه‌های وب مدرن، ریسپانسیو و بهینه."
+      "en": "Web developer in Tehran building React and Next.js interfaces, dashboards, and practical web systems with TypeScript and NestJS.",
+      "fa": "توسعه‌دهنده وب در تهران؛ سازنده رابط‌ها، داشبوردها و سامانه‌های کاربردی با React، Next.js، TypeScript و NestJS."
     },
     "keywords": {
-      "en": "web developer, react, next.js, typescript, javascript, portfolio, resume",
-      "fa": "توسعه‌دهنده وب, ریکت, نکست, تایپ‌اسکریپت, جاوااسکریپت, رزومه, برنامه‌نویس"
+      "en": "web developer, react, next.js, typescript, javascript, dashboards, frontend, full-stack, resume",
+      "fa": "توسعه‌دهنده وب، React، Next.js، TypeScript، JavaScript، داشبورد، فرانت‌اند، فول‌استک، رزومه"
     }
   }
 }

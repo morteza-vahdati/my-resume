@@ -5,6 +5,7 @@ import type { Locale } from "@/i18config"
 import type { ProjectWithLocale } from "@/lib/resume"
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useRef, useState, useCallback } from "react"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
 
 interface ProjectModalProps {
   project: ProjectWithLocale | null
@@ -13,15 +14,17 @@ interface ProjectModalProps {
 }
 
 const SLIDESHOW_INTERVAL = 6000
+const EMPTY_IMAGES: string[] = []
 
 function supportsStableGutter(): boolean {
   return typeof CSS !== "undefined" && CSS.supports("scrollbar-gutter", "stable")
 }
 
 function lockScroll(): void {
-  if (!supportsStableGutter()) {
-    const se = document.scrollingElement as HTMLElement | null
-    if (se) se.style.paddingInlineEnd = `${window.innerWidth - se.clientWidth}px`
+  const scrollingElement = document.scrollingElement as HTMLElement | null
+  const scrollbarWidth = scrollingElement ? window.innerWidth - scrollingElement.clientWidth : 0
+  if (!supportsStableGutter() && scrollbarWidth > 0) {
+    scrollingElement!.style.paddingInlineEnd = `${scrollbarWidth}px`
   }
   document.documentElement.style.overflow = "hidden"
   document.body.style.overflow = "hidden"
@@ -33,17 +36,19 @@ function unlockScroll(): void {
   document.body.style.overflow = ""
   document.body.style.overscrollBehavior = ""
   if (!supportsStableGutter()) {
-    const se = document.scrollingElement as HTMLElement | null
-    if (se) se.style.paddingInlineEnd = ""
+    const scrollingElement = document.scrollingElement as HTMLElement | null
+    if (scrollingElement) scrollingElement.style.paddingInlineEnd = ""
   }
 }
 
 export default function ProjectModal({ project, onClose, locale }: ProjectModalProps) {
   const isRtl = locale === "fa"
-  const images = project?.images ?? []
+  const images = project?.images ?? EMPTY_IMAGES
   const [activeImage, setActiveImage] = useState(0)
   const [paused, setPaused] = useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const compactViewport = useMediaQuery("(max-width: 1023px)")
+  const projectId = project?.id
   const activeIdx = Math.min(activeImage, Math.max(images.length - 1, 0))
   const previouslyFocused = useRef<HTMLElement | null>(null)
   const closeBtnRef = useRef<HTMLButtonElement>(null)
@@ -53,6 +58,16 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
     setActiveImage(0)
     setPaused(false)
   }, [project?.id])
+
+  useEffect(() => {
+    if (!projectId) return
+
+    images.slice(1).forEach((src) => {
+      const preload = new window.Image()
+      preload.decoding = "async"
+      preload.src = src
+    })
+  }, [images, projectId])
 
   useEffect(() => {
     setPrefersReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches)
@@ -97,7 +112,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
   )
 
   useEffect(() => {
-    if (project) {
+    if (projectId) {
       previouslyFocused.current = document.activeElement as HTMLElement
       document.addEventListener("keydown", handleEscape)
       lockScroll()
@@ -108,13 +123,16 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
       unlockScroll()
       previouslyFocused.current?.focus()
     }
-  }, [project, handleEscape])
+  }, [projectId, handleEscape])
 
   return (
     <AnimatePresence>
       {project && (
         <motion.div
           ref={modalRef}
+          role="dialog"
+          aria-modal="true"
+          data-testid="project-modal"
           className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -130,18 +148,18 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
             exit={{ opacity: 0 }}
           />
           <motion.div
-            className="relative w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-2xl lg:max-w-3xl rounded-none sm:rounded-2xl border border-white/75 dark:border-white/10 bg-white dark:bg-[#141414] shadow-[0_20px_60px_rgba(0,0,0,0.24)] overflow-y-auto"
-            initial={{ opacity: 0, scale: 0.92, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 20 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+            className="relative w-full h-[100dvh] min-h-0 max-h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-2xl lg:max-w-3xl rounded-none sm:rounded-2xl border border-white/75 dark:border-white/10 bg-white dark:bg-[#141414] shadow-[0_20px_60px_rgba(0,0,0,0.24)] overflow-y-auto overscroll-contain"
+            initial={compactViewport ? { opacity: 0 } : { opacity: 0, scale: 0.92, y: 20 }}
+            animate={compactViewport ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+            exit={compactViewport ? { opacity: 0 } : { opacity: 0, scale: 0.92, y: 20 }}
+            transition={compactViewport ? { duration: 0.16 } : { duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
             dir={isRtl ? "rtl" : "ltr"}
           >
             <button
               ref={closeBtnRef}
               onClick={onClose}
-              className="fixed sm:absolute top-3 right-3 z-10 w-9 h-9 rounded-xl bg-black/40 backdrop-blur border border-white/20 text-white flex items-center justify-center hover:bg-black/60 transition-colors duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-              aria-label={isRtl ? "بستن" : "Close"}
+              className="absolute top-3 right-3 z-10 w-9 h-9 rounded-xl bg-black/40 backdrop-blur border border-white/20 text-white flex items-center justify-center hover:bg-black/60 transition-colors duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              aria-label={isRtl ? "بستن جزئیات پروژه" : "Close project details"}
             >
               <i className="fa-solid fa-times text-sm" />
             </button>
@@ -162,10 +180,10 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
                     <AnimatePresence mode="wait" initial={false}>
                       <motion.div
                         key={activeIdx}
-                        initial={{ opacity: 0, scale: 1.02 }}
-                        animate={{ opacity: 1, scale: 1 }}
+                        initial={compactViewport ? { opacity: 0 } : { opacity: 0, scale: 1.02 }}
+                        animate={compactViewport ? { opacity: 1 } : { opacity: 1, scale: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeOut" }}
+                        transition={compactViewport ? { duration: 0.12 } : { duration: 0.25, ease: "easeOut" }}
                         className="absolute inset-0"
                       >
                         <Image
@@ -184,7 +202,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
                       <span className="text-[0.65rem] font-bold px-2.5 py-1 rounded-md bg-white/20 backdrop-blur text-white border border-white/20">{project.year}</span>
                       {project.featured && (
                         <span className="text-[0.65rem] font-bold px-2.5 py-1 rounded-md bg-primary/70 backdrop-blur text-white">
-                          {isRtl ? "ویژه" : "Featured"}
+                          {isRtl ? "پیشنهادشده" : "Featured work"}
                         </span>
                       )}
                     </div>
@@ -250,7 +268,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
               {project.details && project.details.length > 0 && (
                 <div className="mb-6">
                   <h4 className="text-xs font-bold tracking-[1px] uppercase text-muted-foreground mb-3">
-                    {isRtl ? "جزئیات فنی" : "Key Details"}
+                    {isRtl ? "نکات کلیدی" : "Key details"}
                   </h4>
                   <ul className="space-y-2">
                     {project.details.map((detail, i) => (
@@ -273,7 +291,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
                       className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white font-semibold text-sm shadow-[0_4px_14px_rgba(var(--primary-rgb),0.3)] hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(var(--primary-rgb),0.4)] transition-all duration-300"
                     >
                       <i className="fa-solid fa-arrow-up-right-from-square" />
-                      {isRtl ? "نمایش زنده" : "Live Demo"}
+                      {isRtl ? "مشاهده نسخه آنلاین" : "View live project"}
                     </a>
                   )}
                   {project.links.code && (
@@ -284,7 +302,7 @@ export default function ProjectModal({ project, onClose, locale }: ProjectModalP
                       className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-transparent text-foreground border-2 border-border font-semibold text-sm hover:border-primary hover:text-primary hover:-translate-y-0.5 transition-all duration-300"
                     >
                       <i className="fa-brands fa-github" />
-                      {isRtl ? "مشاهده کد" : "View Code"}
+                      {isRtl ? "مشاهده کد پروژه" : "View source code"}
                     </a>
                   )}
                 </div>
